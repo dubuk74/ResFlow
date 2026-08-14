@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResFlow | Sistem Kelulusan Penyelidikan & Inovasi KMPk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            },
+            colors: {
+              navy: {
+                800: '#0F2942',
+                900: '#0A1E31',
+                950: '#061320',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @media print {
+        @page {
+          size: auto;
+          margin: 0mm;
+        }
+        body {
+          background-color: white !important;
+          color: black !important;
+          -webkit-print-color-adjust: exact;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        header, footer, nav, button, .print-hidden, .no-print {
+          display: none !important;
+          height: 0 !important;
+          overflow: hidden !important;
+        }
+        #root {
+          padding: 0 !important;
+          margin: 0 !important;
+          display: block !important;
+        }
+        main {
+          padding: 0 !important;
+          max-width: none !important;
+          margin: 0 !important;
+          width: 100% !important;
+          display: block !important;
+        }
+        .container {
+          max-width: none !important;
+          width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        /* Ensure the print document template is visible and takes full width */
+        .hidden.print\:block {
+          display: block !important;
+        }
+        .print-document {
+          width: 210mm; /* A4 width */
+          min-height: 297mm; /* A4 height */
+          padding: 20mm !important;
+          margin: 0 auto !important;
+          background: white !important;
+          box-shadow: none !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
