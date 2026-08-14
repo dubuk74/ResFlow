@@ -131,20 +131,20 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans text-slate-800 antialiased">
       {/* Top Institutional Header - Hidden on Print */}
-      <header className="bg-white border-b border-slate-200/90 px-4 sm:px-8 py-3.5 flex justify-between items-center sticky top-0 z-50 shadow-xs print:hidden">
+      <header className="bg-white border-b border-slate-200/90 px-4 sm:px-8 py-3 flex justify-between items-center sticky top-0 z-50 shadow-xs print:hidden">
         <div 
           onClick={() => setCurrentView('home')}
           className="flex items-center gap-4 sm:gap-5 cursor-pointer group select-none"
           title="Kembali ke Portal Utama"
         >
-          <div className="p-1.5 bg-slate-50 border border-slate-200/90 rounded-2xl shadow-2xs group-hover:border-blue-400 transition-colors">
+          <div className="p-2 bg-white border border-slate-200 rounded-2xl shadow-xs group-hover:border-blue-500 group-hover:shadow-sm transition-all flex items-center justify-center">
             <img 
               src="https://upload.wikimedia.org/wikipedia/ms/7/71/Kolej_Matrikulasi_Perak.png" 
               alt="KMPk Logo" 
-              className="h-12 sm:h-14 w-auto drop-shadow-xs transition-transform duration-200 group-hover:scale-105"
+              className="h-16 sm:h-20 w-auto object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105"
             />
           </div>
-          <div className="border-l-2 border-slate-200 pl-4">
+          <div className="border-l-2 border-slate-200 pl-4 sm:pl-5">
             <div className="flex items-center gap-2.5">
               <h1 className="font-black text-2xl sm:text-3xl text-slate-900 tracking-tight leading-none group-hover:text-blue-900 transition-colors">
                 ResFlow
@@ -157,10 +157,10 @@ const App: React.FC = () => {
                 res-flow.vercel.app
               </span>
             </div>
-            <p className="text-[11px] text-slate-500 font-semibold tracking-wider mt-1.5 flex items-center gap-2">
-              <span>Sistem Kelulusan Penyelidikan & Inovasi</span>
+            <p className="text-xs text-slate-600 font-semibold tracking-wider mt-2 flex items-center gap-2">
+              <span className="text-slate-800 font-bold">Sistem Kelulusan Penyelidikan & Inovasi</span>
               <span className="text-slate-300 hidden sm:inline">•</span>
-              <span className="text-slate-500 hidden sm:inline font-medium">Kolej Matrikulasi Perak</span>
+              <span className="text-blue-800 hidden sm:inline font-bold">Kolej Matrikulasi Perak</span>
               <span className="md:hidden text-blue-600 font-bold text-[10px] bg-blue-50 px-1.5 py-0.5 rounded">res-flow.vercel.app</span>
             </p>
           </div>
@@ -238,15 +238,15 @@ const App: React.FC = () => {
 
       <footer className="bg-white border-t border-slate-200/80 py-8 text-slate-500 text-xs print:hidden">
         <div className="container mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5">
             <img 
               src="https://upload.wikimedia.org/wikipedia/ms/7/71/Kolej_Matrikulasi_Perak.png" 
               alt="KMPk Logo" 
-              className="h-7 w-auto opacity-70 grayscale"
+              className="h-11 w-auto drop-shadow-xs"
             />
             <div className="text-left">
-              <p className="font-bold text-slate-700">Kolej Matrikulasi Perak</p>
-              <p className="text-[11px] text-slate-400">Kementerian Pendidikan Malaysia</p>
+              <p className="font-bold text-slate-800 text-sm">Kolej Matrikulasi Perak</p>
+              <p className="text-xs text-slate-500">Kementerian Pendidikan Malaysia</p>
             </div>
           </div>
 
