@@ -178,6 +178,10 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
               <p className="text-xs text-slate-600 leading-relaxed">
                 Saluran hebahan pertandingan inovasi kebangsaan & antarabangsa, kolokium penyelidikan, geran, dan peluang penerbitan berimpak tinggi.
               </p>
+              <ul className="text-xs text-slate-600 space-y-1 text-left list-disc list-inside pt-0.5 pb-0.5">
+                <li>Ingin maklumat Pertandingan/ Simposium/ Kolokium Semasa atau Akan datang.</li>
+                <li>Ingin mengiklankan Pertandingan/ Simposium/ Kolokium akan datang.</li>
+              </ul>
               <div className="pt-1.5">
                 <a 
                   href="https://t.me/infoksajiankmpk" 
