@@ -90,12 +90,12 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
   };
 
   return (
-    <div className="relative flex flex-wrap items-center gap-2">
+    <div className="relative flex flex-wrap items-center gap-1.5 sm:gap-2 shrink-0">
       {/* 1. DEDICATED SEPARATE TIMBALAN PENGARAH BUTTON */}
       <button
         type="button"
         onClick={() => onRoleChange(UserRole.DIRECTOR)}
-        className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 cursor-pointer shadow-sm ${
+        className={`px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-sm shrink-0 whitespace-nowrap ${
           isDirectorActive
             ? 'bg-slate-900 text-white ring-2 ring-indigo-500 shadow-indigo-900/20'
             : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 hover:border-indigo-300'
@@ -117,7 +117,7 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
       <button
         type="button"
         onClick={() => onRoleChange(UserRole.HOD)}
-        className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 cursor-pointer shadow-sm ${
+        className={`px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-sm shrink-0 whitespace-nowrap ${
           isHodActive
             ? 'bg-teal-900 text-white ring-2 ring-teal-400 shadow-teal-900/20'
             : 'bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-200 hover:border-teal-300'
@@ -139,7 +139,7 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
       <button
         type="button"
         onClick={() => onRoleChange(UserRole.APPLICANT)}
-        className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-2 cursor-pointer shadow-sm ${
+        className={`px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-sm shrink-0 whitespace-nowrap ${
           isApplicantActive
             ? 'bg-blue-700 text-white ring-2 ring-blue-400 shadow-blue-700/20'
             : 'bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 hover:border-blue-300'
@@ -154,7 +154,7 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
       <div className="h-6 w-[1px] bg-slate-200 hidden sm:block"></div>
 
       {/* 4. URUS SETIA & PENILAI DROPDOWN */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 shrink-0">
         <div className="relative group">
           <select 
             value={isDropdownActive ? currentRole : ''}
@@ -163,7 +163,7 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
                 handleChange(e.target.value as UserRole);
               }
             }}
-            className={`appearance-none rounded-full px-4 py-2 pr-9 text-xs sm:text-sm font-medium cursor-pointer transition-all outline-none border ${
+            className={`appearance-none rounded-full px-3 py-1.5 sm:px-4 sm:py-2 pr-8 sm:pr-9 text-xs sm:text-sm font-medium cursor-pointer transition-all outline-none border shrink-0 whitespace-nowrap ${
               isDropdownActive
                 ? 'bg-indigo-900 border-indigo-700 text-white font-bold ring-2 ring-indigo-400'
                 : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'

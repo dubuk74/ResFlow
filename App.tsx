@@ -131,44 +131,45 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans text-slate-800 antialiased">
       {/* Top Institutional Header - Hidden on Print */}
-      <header className="bg-white border-b border-slate-200/90 px-4 sm:px-8 py-3 flex justify-between items-center sticky top-0 z-50 shadow-xs print:hidden">
+      <header className="bg-white border-b border-slate-200/90 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3 lg:gap-5 sticky top-0 z-50 shadow-xs print:hidden">
         <div 
           onClick={() => setCurrentView('home')}
-          className="flex items-center gap-4 sm:gap-5 cursor-pointer group select-none"
+          className="flex items-center gap-3 sm:gap-4 lg:gap-5 cursor-pointer group select-none shrink-0"
           title="Kembali ke Portal Utama"
         >
-          <div className="p-2 bg-white border border-slate-200 rounded-2xl shadow-xs group-hover:border-blue-500 group-hover:shadow-sm transition-all flex items-center justify-center">
+          <div className="p-1.5 sm:p-2 bg-white border border-slate-200 rounded-2xl shadow-xs group-hover:border-blue-500 group-hover:shadow-sm transition-all flex items-center justify-center shrink-0">
             <img 
               src="https://upload.wikimedia.org/wikipedia/ms/7/71/Kolej_Matrikulasi_Perak.png" 
               alt="KMPk Logo" 
-              className="h-16 sm:h-20 w-auto object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105"
+              referrerPolicy="no-referrer"
+              loading="eager"
+              className="h-14 sm:h-16 md:h-18 lg:h-20 w-auto object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105 shrink-0"
             />
           </div>
-          <div className="border-l-2 border-slate-200 pl-4 sm:pl-5">
-            <div className="flex items-center gap-2.5">
-              <h1 className="font-black text-2xl sm:text-3xl text-slate-900 tracking-tight leading-none group-hover:text-blue-900 transition-colors">
+          <div className="border-l-2 border-slate-200 pl-3 sm:pl-4">
+            <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+              <h1 className="font-black text-xl sm:text-2xl md:text-3xl text-slate-900 tracking-tight leading-none group-hover:text-blue-900 transition-colors">
                 ResFlow
               </h1>
-              <span className="text-[10px] sm:text-[11px] font-black px-2.5 py-0.5 rounded-md bg-blue-900 text-white tracking-widest uppercase shadow-2xs">
+              <span className="text-[10px] sm:text-[11px] font-black px-2 sm:px-2.5 py-0.5 rounded-md bg-blue-900 text-white tracking-widest uppercase shadow-2xs">
                 KMPk
               </span>
-              <span className="hidden md:inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 border border-blue-200/80 px-2.5 py-0.5 rounded-md">
+              <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold text-blue-700 bg-blue-50 border border-blue-200/80 px-2.5 py-0.5 rounded-md">
                 <i className="fas fa-globe text-[10px] text-blue-500"></i>
                 res-flow.vercel.app
               </span>
             </div>
-            <p className="text-xs text-slate-600 font-semibold tracking-wider mt-2 flex items-center gap-2">
+            <p className="text-[11px] sm:text-xs text-slate-600 font-semibold tracking-wider mt-1 sm:mt-1.5 flex items-center gap-1.5 sm:gap-2 flex-wrap">
               <span className="text-slate-800 font-bold">Sistem Kelulusan Penyelidikan & Inovasi</span>
               <span className="text-slate-300 hidden sm:inline">•</span>
               <span className="text-blue-800 hidden sm:inline font-bold">Kolej Matrikulasi Perak</span>
-              <span className="md:hidden text-blue-600 font-bold text-[10px] bg-blue-50 px-1.5 py-0.5 rounded">res-flow.vercel.app</span>
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex items-center gap-2 sm:gap-3 w-full lg:w-auto justify-between lg:justify-end overflow-x-auto pb-1 lg:pb-0">
           {!GoogleSheetService.isEnabled() && (
-            <div className="hidden lg:flex items-center gap-1.5 bg-amber-50 text-amber-800 px-3 py-1.5 rounded-lg border border-amber-200/80 text-[11px] font-bold">
+            <div className="hidden xl:flex items-center gap-1.5 bg-amber-50 text-amber-800 px-3 py-1.5 rounded-lg border border-amber-200/80 text-[11px] font-bold shrink-0">
               <i className="fas fa-database text-amber-600"></i>
               MOD TEMPATAN (Offline Storage)
             </div>
