@@ -223,7 +223,7 @@ const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, 
               className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-semibold text-xs shadow-sm transition-all cursor-pointer"
             >
               <i className="fas fa-plus"></i>
-              Permohonan Baru
+              Permohonan Baharu
             </button>
           )}
         </div>
@@ -420,10 +420,10 @@ const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, 
                                   onEditApplication(app);
                                 }}
                                 className="bg-amber-50 hover:bg-amber-500 text-amber-700 hover:text-white px-2.5 py-1.5 rounded-lg font-bold text-xs transition-all border border-amber-200 cursor-pointer flex items-center gap-1 shadow-sm"
-                                title="Kemaskini Permohonan Ini"
+                                title="Kemas Kini Permohonan Ini"
                               >
                                 <i className="fas fa-edit text-[11px]"></i>
-                                <span className="hidden xl:inline">Kemaskini</span>
+                                <span className="hidden xl:inline">Kemas Kini</span>
                               </button>
                             )}
                             <button
@@ -507,16 +507,16 @@ const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, 
                   <button 
                     onClick={() => onEditApplication(selectedApp)}
                     className="p-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl transition-all flex items-center gap-2 border border-amber-500 shadow-sm cursor-pointer"
-                    title="Kemaskini Permohonan Ini"
+                    title="Kemas Kini Permohonan Ini"
                   >
                     <i className="fas fa-edit"></i>
-                    <span className="text-xs font-bold uppercase hidden sm:inline">Kemaskini Permohonan</span>
+                    <span className="text-xs font-bold uppercase hidden sm:inline">Kemas Kini Permohonan</span>
                   </button>
                 )}
                 <button 
                   onClick={() => setShowEmailModal(true)}
                   className="p-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl transition-all flex items-center gap-2 border border-sky-600 shadow-sm cursor-pointer"
-                  title="Pratonton & Hantar E-Mel Notifikasi Pemohon"
+                  title="Pratonton & Hantar E-mel Notifikasi Pemohon"
                 >
                   <i className="fas fa-envelope-open-text"></i>
                   <span className="text-xs font-bold uppercase hidden sm:inline">Notifikasi E-mel</span>

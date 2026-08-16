@@ -41,7 +41,7 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
               activeTab === 'overview' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200'
             }`}
           >
-            <i className="fas fa-sitemap"></i> Alur Kerja
+            <i className="fas fa-sitemap"></i> Aliran Kerja
           </button>
           <button
             onClick={() => setActiveTab('applicant')}
@@ -157,7 +157,7 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
               <div className="space-y-3">
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
                   <h5 className="font-bold text-indigo-600 text-xs">1. Menghantar Permohonan Baharu</h5>
-                  <p className="text-xs">Klik butang <strong>"Penyerahan Baru"</strong> di bahagian atas portal. Pilih Jawatankuasa Sasaran (JK Penyelidikan atau JK Inovasi), isi maklumat peribadi/pasukan, maklumat acara (Kebangsaan / Antarabangsa Dalam Negeri / Antarabangsa Luar Negeri), dan pautan dokumen penyelidikan.</p>
+                  <p className="text-xs">Klik butang <strong>"Penyerahan Baharu"</strong> di bahagian atas portal. Pilih Jawatankuasa Sasaran (JK Penyelidikan atau JK Inovasi), isi maklumat peribadi/pasukan, maklumat acara (Kebangsaan / Antarabangsa Dalam Negeri / Antarabangsa Luar Negeri), dan pautan dokumen penyelidikan.</p>
                 </div>
 
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
@@ -166,8 +166,8 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
                 </div>
 
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
-                  <h5 className="font-bold text-amber-800 text-xs">3. Mengemaskini Pencapaian / Anugerah Acara</h5>
-                  <p className="text-xs">Selepas menyertai acara, pemohon boleh mengemaskini status anugerah (contoh: Pingat Emas/Perak/Bronze/Sijil) di ruangan 🏆 <strong>"Kemaskini Status / Pencapaian Acara"</strong>. Data ini disimpan terus ke Google Sheets.</p>
+                  <h5 className="font-bold text-amber-800 text-xs">3. Mengemas Kini Pencapaian / Anugerah Acara</h5>
+                  <p className="text-xs">Selepas menyertai acara, pemohon boleh mengemas kini status anugerah (contoh: Pingat Emas/Perak/Gangsa/Sijil) di ruangan 🏆 <strong>"Kemas Kini Status / Pencapaian Acara"</strong>. Data ini disimpan terus ke Google Sheets.</p>
                 </div>
 
                 <div className="bg-rose-50 p-4 rounded-xl border border-rose-200 space-y-1">
@@ -177,7 +177,7 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
 
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
                   <h5 className="font-bold text-indigo-600 text-xs">5. Mencetak Laporan & Salinan Kelulusan</h5>
-                  <p className="text-xs">Klik butang <strong>"Cetak Laporan Penuh"</strong> untuk memapar dan mencetak Laporan Penuh Kelulusan & Jejak Audit rasmi untuk simpanan atau rujukan fail fail perkhidmatan.</p>
+                  <p className="text-xs">Klik butang <strong>"Cetak Laporan Penuh"</strong> untuk memapar dan mencetak Laporan Penuh Kelulusan & Jejak Audit rasmi untuk simpanan atau rujukan fail perkhidmatan.</p>
                 </div>
               </div>
             </div>
@@ -215,7 +215,7 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
 
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
                   <h5 className="font-bold text-amber-700 text-xs">2. Memasukkan Skala Penilaian & Cadangan</h5>
-                  <p className="text-xs">Pilih Skala Penilaian: <strong>Cemerlang (Excellent)</strong>, <strong>Baik (Good)</strong>, atau <strong>Perlu Penambahbaikan (Needs Improvement)</strong>, kemudian taip ulasan/saranan constructive dan tekan Simpan.</p>
+                  <p className="text-xs">Pilih Skala Penilaian: <strong>Cemerlang (Excellent)</strong>, <strong>Baik (Good)</strong>, atau <strong>Perlu Penambahbaikan (Needs Improvement)</strong>, kemudian taip ulasan/saranan membina dan tekan Simpan.</p>
                 </div>
               </div>
             </div>
@@ -265,7 +265,7 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
               <h4 className="font-extrabold text-slate-900 text-base">Integrasi Google Sheets & Apps Script</h4>
               
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-xs">
-                <p>Sistem ini menyinkronkan data permohonan secara langsung dengan fail Google Sheets anda melalui Google Apps Script Web App URL.</p>
+                <p>Sistem ini menyelaraskan data permohonan secara langsung dengan fail Google Sheets anda melalui Google Apps Script Web App URL.</p>
                 
                 <div className="p-3 bg-white rounded-xl border border-slate-300 font-mono text-[11px] break-all">
                   <strong>Pautan Deployment Terkini (E-mel & Google Sheets):</strong><br />

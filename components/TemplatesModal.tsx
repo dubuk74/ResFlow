@@ -20,7 +20,7 @@ export const TemplatesModal: React.FC<TemplatesModalProps> = ({ isOpen, onClose 
       icon: 'fa-file-word',
       color: 'bg-blue-600',
       sampleContent: `TAJUK PENYELIDIKAN: [Masukkan Tajuk Penyelidikan Anda Di Sini]
-NAMA PENELITI: [Nama Ketua & Ahli]
+NAMA PENYELIDIK: [Nama Ketua & Ahli]
 ABSTRAK:
 Kajian ini bertujuan untuk menilai keberkesanan... [Maksimum 250 patah perkataan]
 KATA KUNCI: Inovasi, Matrikulasi, Pengajaran & Pembelajaran.`
@@ -33,11 +33,11 @@ KATA KUNCI: Inovasi, Matrikulasi, Pengajaran & Pembelajaran.`
       description: 'Format paparan slaid 10-slide standard untuk sesi penilaian panel dan pertandingan inovasi.',
       icon: 'fa-file-powerpoint',
       color: 'bg-amber-600',
-      sampleContent: `SLIK 1: Tajuk & Ahli Kumpulan
-SLIK 2: Pernyataan Masalah & Objektif
-SLIK 3: Metodologi / Rekabentuk Inovasi
-SLIK 4: Impak Kepada Pelajar/Kolej
-SLIK 5: Kesimpulan & Cadangan Masa Depan.`
+      sampleContent: `SLAID 1: Tajuk & Ahli Kumpulan
+SLAID 2: Pernyataan Masalah & Objektif
+SLAID 3: Metodologi / Reka Bentuk Inovasi
+SLAID 4: Impak Kepada Pelajar/Kolej
+SLAID 5: Kesimpulan & Cadangan Masa Depan.`
     },
     {
       id: 3,
@@ -55,7 +55,7 @@ Dengan ini disahkan bahawa penyelidikan bertajuk [...] telah disemak dan disokon
       title: 'Templat Laporan Pencapaian & Anugerah Acara (Post-Event)',
       category: 'Laporan Pencapaian',
       fileType: 'DOCX / PDF',
-      description: 'Templat penyediaan laporan selepas menyertai pertandigan/persidangan untuk rekod kolej.',
+      description: 'Templat penyediaan laporan selepas menyertai pertandingan/persidangan untuk rekod kolej.',
       icon: 'fa-trophy',
       color: 'bg-purple-600',
       sampleContent: `REKOD PENCAPAIAN ACARA:

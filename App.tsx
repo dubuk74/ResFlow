@@ -225,7 +225,7 @@ const App: React.FC = () => {
                 className={`text-xs font-bold flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer whitespace-nowrap ${currentView === 'create' && !editingApp ? 'text-white bg-emerald-600 shadow-xs' : 'text-emerald-300 hover:text-white hover:bg-slate-800'}`}
               >
                 <i className="fas fa-file-signature text-xs"></i>
-                Hantar Permohonan Baru
+                Hantar Permohonan Baharu
               </button>
             )}
           </div>

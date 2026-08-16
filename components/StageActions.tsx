@@ -274,7 +274,7 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
                 onClick={() => setIsEditingAchievement(true)}
                 className="text-xs font-bold text-amber-900 bg-amber-200/80 hover:bg-amber-300 px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
               >
-                <i className="fas fa-edit text-amber-800 text-xs"></i> Kemaskini
+                <i className="fas fa-edit text-amber-800 text-xs"></i> Kemas Kini
               </button>
             )}
           </div>
@@ -287,7 +287,7 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
 
           {app.achievementDate && (
             <p className="text-[10px] font-bold text-amber-800/80">
-              Tarikh Kemaskini: {new Date(app.achievementDate).toLocaleDateString('ms-MY', { day: '2-digit', month: 'long', year: 'numeric' })}
+              Tarikh Kemas Kini: {new Date(app.achievementDate).toLocaleDateString('ms-MY', { day: '2-digit', month: 'long', year: 'numeric' })}
             </p>
           )}
         </div>
@@ -302,9 +302,9 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
               🏆
             </div>
             <div>
-              <h4 className="font-extrabold text-amber-950 text-base">Kemaskini Status / Pencapaian Acara</h4>
+              <h4 className="font-extrabold text-amber-950 text-base">Kemas Kini Status / Pencapaian Acara</h4>
               <p className="text-xs text-amber-800">
-                {hasAchievement ? 'Kemas kini keputusan atau anugerah yang diterima.' : 'Sudah menyertai acara? Sila kemaskini pencapaian/anugerah anda di sini.'}
+                {hasAchievement ? 'Kemas kini keputusan atau anugerah yang diterima.' : 'Sudah menyertai acara? Sila kemas kini pencapaian/anugerah anda di sini.'}
               </p>
             </div>
           </div>
@@ -364,7 +364,7 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
             ) : (
               <>
                 <i className="fas fa-save"></i>
-                SIMPAN & KEMASKINI PENCAPAIAN KE GOOGLE SHEET
+                SIMPAN & KEMAS KINI PENCAPAIAN KE GOOGLE SHEET
               </>
             )}
           </button>
@@ -498,7 +498,7 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
             className="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
           >
             <i className="fas fa-edit"></i>
-            Kemaskini Permohonan
+            Kemas Kini Permohonan
           </button>
         </div>
       )}

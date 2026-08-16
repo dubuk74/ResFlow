@@ -118,11 +118,11 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
     <div className="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
       <div className="bg-indigo-600 p-8 text-white">
         <h2 className="text-2xl font-bold">
-          {isEditing ? 'Kemaskini Permohonan Penyelidikan' : 'Permohonan Penyelidikan Baru'}
+          {isEditing ? 'Kemas Kini Permohonan Penyelidikan' : 'Permohonan Penyelidikan Baharu'}
         </h2>
         <p className="text-indigo-100 text-sm mt-1">
           {isEditing 
-            ? `Kemaskini maklumat permohonan penyelidikan anda (ID Rujukan: ${initialData?.id}).` 
+            ? `Kemas kini maklumat permohonan penyelidikan anda (ID Rujukan: ${initialData?.id}).` 
             : 'Isi butiran berikut untuk menghantar penyelidikan anda untuk kelulusan.'}
         </p>
         
@@ -260,7 +260,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-slate-500 uppercase">Tarikh Akhir Acara (Jika Berkaitan)</label>
-                  <input type="date" value={formData.eventEndDate} min={formData.eventDate} onChange={e => setFormData({...formData, eventEndDate: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Opsional" />
+                  <input type="date" value={formData.eventEndDate} min={formData.eventDate} onChange={e => setFormData({...formData, eventEndDate: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Pilihan" />
                 </div>
                 <div className="space-y-1 md:col-span-2">
                   <label className="text-xs font-bold text-slate-500 uppercase">Peringkat</label>
@@ -293,7 +293,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${formData.selectedReviewers.includes(r) ? 'bg-indigo-600 border-indigo-600' : 'border-slate-300'}`}>
                     {formData.selectedReviewers.includes(r) && <i className="fas fa-check text-[10px] text-white"></i>}
                   </div>
-                  <span className="text-sm font-semibold text-slate-700">{r.includes('MJPKKM') ? 'JK MJPKKM (Pensyarah)' : 'JK INOVASI (Pensyarah Pembimbing Pelajar)'}</span>
+                  <span className="text-sm font-semibold text-slate-700">{r.includes('MJPKKM') ? 'JK MJPKKM (Pensyarah)' : 'JK Inovasi (Pensyarah Pembimbing Pelajar)'}</span>
                 </div>
               ))}
             </div>
@@ -301,7 +301,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
               <p className="text-xs font-bold text-slate-500 uppercase">Jawatankuasa Dipilih ({formData.selectedReviewers.length}/1)</p>
               <div className="flex flex-wrap gap-2 mt-2">
                 {formData.selectedReviewers.map(r => (
-                  <span key={r} className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold">{r.includes('MJPKKM') ? 'JK MJPKKM' : 'JK INOVASI'}</span>
+                  <span key={r} className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold">{r.includes('MJPKKM') ? 'JK MJPKKM' : 'JK Inovasi'}</span>
                 ))}
                 {formData.selectedReviewers.length === 0 && <span className="text-slate-400 text-xs italic">Tiada jawatankuasa dipilih</span>}
               </div>
@@ -321,7 +321,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
             </button>
           ) : (
             <button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-2.5 rounded-lg font-bold shadow-md transition-all">
-              {isEditing ? 'SIMPAN KEMASKINI' : 'HANTAR PERMOHONAN'}
+              {isEditing ? 'SIMPAN KEMAS KINI' : 'HANTAR PERMOHONAN'}
             </button>
           )}
         </div>

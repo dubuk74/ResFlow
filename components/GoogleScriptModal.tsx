@@ -293,7 +293,7 @@ function sendApplicantEmailNotification(postData) {
       "",
       "--------------------------------------------------",
       "Sistem ResFlow (Pengurusan Permohonan Penyelidikan & Inovasi)",
-      "Emel ini dihantar secara automatik melalui Google Apps Script."
+      "E-mel ini dihantar secara automatik melalui Google Apps Script."
     ];
     const body = bodyLines.join("\\n");
 
@@ -336,7 +336,7 @@ export const GoogleScriptModal: React.FC<GoogleScriptModalProps> = ({ isOpen, on
         </div>
 
         <div className="my-4 text-xs text-slate-600 space-y-2">
-          <p className="font-semibold text-slate-800">Langkah-langkah Kemaskini Google Sheet & Aktifkan Notifikasi E-mel:</p>
+          <p className="font-semibold text-slate-800">Langkah-langkah Mengemas Kini Google Sheet & Aktifkan Notifikasi E-mel:</p>
           <ol className="list-decimal list-inside space-y-1.5 pl-1">
             <li>Buka Google Sheet anda, tekan <strong>Extensions &gt; Apps Script</strong>.</li>
             <li>Gantikan semua kod sedia ada dengan skrip di bawah.</li>

@@ -67,7 +67,7 @@ Jawatankuasa   : JK ${app.targetCommittee || 'MJPKKM'}
 --------------------------------------------------
 
 STATUS TERKINI : ${statusMalay.toUpperCase()}
-${updatedByRole ? `Dikemaskini Oleh: ${updatedByRole}\n` : ''}${stageDetails}${notesBlock}
+${updatedByRole ? `Dikemas kini oleh: ${updatedByRole}\n` : ''}${stageDetails}${notesBlock}
 Sila log masuk ke Portal ResFlow untuk menyemak butiran lanjut atau muat turun laporan permohonan anda.
 
 Pautan Manuskrip/Dokumen Anda:
@@ -78,7 +78,7 @@ Sekian, terima kasih.
 --------------------------------------------------
 Sistem ResFlow
 (Pengurusan Permohonan Penyelidikan & Inovasi)
-Emel ini dijana secara automatik oleh sistem.
+E-mel ini dijana secara automatik oleh sistem.
 --------------------------------------------------`;
 
   return {

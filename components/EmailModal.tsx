@@ -77,7 +77,7 @@ export const EmailModal: React.FC<EmailModalProps> = ({
             </div>
             <div>
               <span className="text-slate-500 font-semibold block text-[11px]">Alamat E-mel:</span>
-              <span className="font-bold text-indigo-700 text-xs font-mono">{app.applicantEmail || 'Tiada emel'}</span>
+              <span className="font-bold text-indigo-700 text-xs font-mono">{app.applicantEmail || 'Tiada e-mel'}</span>
             </div>
           </div>
 

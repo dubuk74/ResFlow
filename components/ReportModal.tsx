@@ -253,7 +253,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ app, onClose, initialT
                       )}
                       {app.achievementDate && (
                         <span className="text-[10px] text-amber-800 font-bold block mt-1">
-                          Tarikh Kemaskini Keputusan: {new Date(app.achievementDate).toLocaleDateString('ms-MY')}
+                          Tarikh Kemas Kini Keputusan: {new Date(app.achievementDate).toLocaleDateString('ms-MY')}
                         </span>
                       )}
                     </div>
@@ -282,7 +282,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ app, onClose, initialT
                     <span className="font-semibold text-slate-800">{app.applicantIdCard}</span>
                   </div>
                   <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <span className="font-bold text-slate-500 block">Emel:</span>
+                    <span className="font-bold text-slate-500 block">E-mel:</span>
                     <span className="font-semibold text-slate-800">{app.applicantEmail}</span>
                   </div>
                   <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">

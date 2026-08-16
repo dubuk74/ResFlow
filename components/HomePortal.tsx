@@ -69,7 +69,7 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
                 className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-xl font-bold transition-all flex items-center gap-2.5 shadow-lg shadow-blue-900/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-sm"
               >
                 <i className="fas fa-file-signature text-base"></i>
-                <span>Hantar Permohonan Baru</span>
+                <span>Hantar Permohonan Baharu</span>
               </button>
             ) : role === UserRole.DIRECTOR ? (
               <button 
@@ -179,7 +179,7 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
                 Saluran hebahan pertandingan inovasi kebangsaan & antarabangsa, kolokium penyelidikan, geran, dan peluang penerbitan berimpak tinggi.
               </p>
               <ul className="text-xs text-slate-600 space-y-1 text-left list-disc list-inside pt-0.5 pb-0.5">
-                <li>Ingin maklumat Pertandingan/ Simposium/ Kolokium Semasa atau Akan datang.</li>
+                <li>Ingin maklumat Pertandingan/ Simposium/ Kolokium Semasa atau akan datang.</li>
                 <li>Ingin mengiklankan Pertandingan/ Simposium/ Kolokium akan datang.</li>
               </ul>
               <div className="pt-1.5">

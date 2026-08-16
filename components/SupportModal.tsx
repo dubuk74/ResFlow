@@ -68,7 +68,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                 <i className="fas fa-lightbulb"></i>
               </div>
               <div>
-                <h4 className="font-bold text-slate-800 text-sm">Urus Setia JK INOVASI</h4>
+                <h4 className="font-bold text-slate-800 text-sm">Urus Setia JK Inovasi/KIK</h4>
                 <p className="text-xs text-slate-600 mt-1">Jawatankuasa Inovasi & Pedagogi KMPk</p>
                 <div className="mt-2 text-xs space-y-0.5 text-slate-500 font-medium">
                   <p><i className="fas fa-envelope text-indigo-600 mr-1.5"></i> inovasi@kmpk.edu.my</p>
@@ -102,7 +102,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                   <i className="fas fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
                 </summary>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Anda boleh mengemaskini fail terus di Google Drive tanpa perlu menukar pautan (asalkan tetapan perkongsian Google Drive dibuka kepada <i>"Anyone with the link can view"</i>). Jika perlu menukar maklumat utama, sila hubungi Setiausaha JK berkenaan.
+                  Anda boleh mengemas kini fail terus di Google Drive tanpa perlu menukar pautan (asalkan tetapan perkongsian Google Drive dibuka kepada <i>"Anyone with the link can view"</i>). Jika perlu menukar maklumat utama, sila hubungi Setiausaha JK berkenaan.
                 </p>
               </details>
 
@@ -112,7 +112,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                   <i className="fas fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
                 </summary>
                 <p className="text-xs text-slate-600 mt-2 leading-relaxed">
-                  Sila baca ulasan daripada Ketua Jabatan pada Jejak Audit. Buat penambahbaikan pada kertas penyelidikan anda, kemudian klik <strong>"Penyerahan Baru"</strong> untuk membuat permohonan baharu.
+                  Sila baca ulasan daripada Ketua Jabatan pada Jejak Audit. Buat penambahbaikan pada kertas penyelidikan anda, kemudian klik <strong>"Penyerahan Baharu"</strong> untuk membuat permohonan baharu.
                 </p>
               </details>
             </div>
@@ -122,7 +122,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
             <h4 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
               <i className="fas fa-paper-plane text-blue-600"></i>
-              Borang Pertanyaan / Bantuan Bantuan Bantuan
+              Borang Pertanyaan / Bantuan
             </h4>
 
             {ticketSubmitted ? (
@@ -166,7 +166,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                   >
                     <option value="Teknikal">Masalah Teknikal / Bug Portal</option>
                     <option value="Status">Semakan Status Permohonan</option>
-                    <option value="GoogleSheet">Google Sheets & Integration</option>
+                    <option value="GoogleSheet">Google Sheets & Integrasi</option>
                     <option value="Lain-lain">Lain-lain Pertanyaan</option>
                   </select>
                 </div>
@@ -176,7 +176,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
                   <textarea
                     required
                     rows={3}
-                    placeholder="Tuliskan masalah atau soalan anda secara rinci..."
+                    placeholder="Tuliskan masalah atau soalan anda secara terperinci..."
                     value={formData.message}
                     onChange={e => setFormData({ ...formData, message: e.target.value })}
                     className="w-full text-xs p-2.5 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500 outline-none"

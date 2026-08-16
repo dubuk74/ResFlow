@@ -82,7 +82,7 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ app, isActive, onClic
             : 'bg-amber-50 text-amber-900 border-amber-200'
         }`}>
           <i className={`${isMj ? 'fas fa-microscope' : 'fas fa-lightbulb'} text-[9px]`}></i>
-          JK {committee}
+          {committee}
         </span>
         {examiner ? (
           <span className="text-[10px] font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200 inline-flex items-center gap-1">
