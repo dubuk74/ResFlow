@@ -257,6 +257,7 @@ const App: React.FC = () => {
             />
             <div className="text-left">
               <p className="font-bold text-slate-800 text-sm">Kolej Matrikulasi Perak</p>
+              <p className="text-xs text-slate-500 font-medium">Dibangunkan oleh JK MJPKKM & JK Inovasi/KIK</p>
             </div>
           </div>
 
