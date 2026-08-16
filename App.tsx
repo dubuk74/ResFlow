@@ -257,7 +257,6 @@ const App: React.FC = () => {
             />
             <div className="text-left">
               <p className="font-bold text-slate-800 text-sm">Kolej Matrikulasi Perak</p>
-              <p className="text-xs text-slate-500">Kementerian Pendidikan Malaysia</p>
             </div>
           </div>
 
