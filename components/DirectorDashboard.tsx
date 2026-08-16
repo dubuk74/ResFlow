@@ -15,8 +15,10 @@ export const DirectorDashboard: React.FC<DirectorDashboardProps> = ({
   onUpdateApplication,
   onSwitchToStandardView
 }) => {
-  // Tabs: 'MJPKKM', 'INOVASI', 'COMPLETED'
-  const [activeTab, setActiveTab] = useState<'MJPKKM' | 'INOVASI' | 'COMPLETED'>('MJPKKM');
+  // Modals for Report & Email
+  const [reportApp, setReportApp] = useState<Application | null>(null);
+  const [emailApp, setEmailApp] = useState<Application | null>(null);
+  const [manualTab, setManualTab] = useState<'MJPKKM' | 'INOVASI' | 'COMPLETED' | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   
   // Action Modal State
@@ -26,10 +28,6 @@ export const DirectorDashboard: React.FC<DirectorDashboardProps> = ({
   const [directorComments, setDirectorComments] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-
-  // Modals for Report & Email
-  const [reportApp, setReportApp] = useState<Application | null>(null);
-  const [emailApp, setEmailApp] = useState<Application | null>(null);
 
   // Group applications
   const { pendingMjpxkm, pendingInovasi, completedApps } = useMemo(() => {
@@ -55,6 +53,30 @@ export const DirectorDashboard: React.FC<DirectorDashboardProps> = ({
 
     return { pendingMjpxkm, pendingInovasi, completedApps };
   }, [applications]);
+
+  // Active Tab: User selection or smart default prioritizing the committee with highest pending tasks
+  const activeTab: 'MJPKKM' | 'INOVASI' | 'COMPLETED' = useMemo(() => {
+    if (manualTab !== null) {
+      return manualTab;
+    }
+    if (pendingInovasi.length > pendingMjpxkm.length) {
+      return 'INOVASI';
+    }
+    if (pendingMjpxkm.length > 0) {
+      return 'MJPKKM';
+    }
+    if (pendingInovasi.length > 0) {
+      return 'INOVASI';
+    }
+    if (completedApps.length > 0) {
+      return 'COMPLETED';
+    }
+    return 'MJPKKM';
+  }, [manualTab, pendingInovasi.length, pendingMjpxkm.length, completedApps.length]);
+
+  const setActiveTab = (tab: 'MJPKKM' | 'INOVASI' | 'COMPLETED') => {
+    setManualTab(tab);
+  };
 
   // Current list based on active tab and search
   const currentList = useMemo(() => {
