@@ -108,13 +108,13 @@ const App: React.FC = () => {
               } else {
                 await handleCreateApplication(app);
               }
-            }}
+            }} 
           />
         );
       case 'applications':
         return (
           <Dashboard 
-            role={currentUserRole}
+            role={currentUserRole} 
             applications={applications}
             resetKey={dashboardResetKey}
             onCreateNew={() => {
