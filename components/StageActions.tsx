@@ -339,7 +339,7 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
 
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-              Butiran Keputusan / Tajuk Anugerah (Pilihan)
+              Butiran Keputusan / Tajuk Anugerah (Pilihan)/ Link Salinan Sijil (1 Sampel)
             </label>
             <textarea
               placeholder="Contoh: Mendapat Anugerah Emas & Tempat Pertama Kategori ICT dalam Pertandingan Inovasi..."
