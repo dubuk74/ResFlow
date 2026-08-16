@@ -261,7 +261,7 @@ const App: React.FC = () => {
 
           <div className="text-center md:text-right space-y-1">
             <p className="font-medium text-slate-600">
-              Sistem ResFlow &copy; {new Date().getFullYear()} • Hak Cipta Terpelihara Jawatankuasa Penyelidikan & Inovasi
+              Sistem ResFlow &copy; {new Date().getFullYear()} • Hak Cipta Terpelihara JK MJPKKM & JK Inovasi/KIK
             </p>
             <div className="flex items-center justify-center md:justify-end gap-3 pt-0.5">
               {GoogleSheetService.isEnabled() ? (
