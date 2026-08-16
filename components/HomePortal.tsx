@@ -215,10 +215,16 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
             {/* 2. Garis Panduan */}
             <button 
               onClick={() => setShowGuidelines(true)}
-              className="group p-3.5 bg-slate-50 hover:bg-emerald-50 border border-slate-200/70 hover:border-emerald-200 rounded-xl transition-all text-left cursor-pointer flex flex-col justify-between"
+              className="group p-3.5 bg-slate-50 hover:bg-emerald-50 border border-slate-200/70 hover:border-emerald-200 rounded-xl transition-all text-left cursor-pointer flex flex-col justify-between relative overflow-hidden"
             >
-              <div className="w-8 h-8 bg-white border border-slate-200/80 shadow-2xs rounded-lg flex items-center justify-center text-slate-500 group-hover:text-emerald-800 mb-2.5 transition-colors">
-                <i className="fas fa-book text-xs"></i>
+              <div className="flex items-center justify-between w-full mb-2">
+                <div className="w-8 h-8 bg-white border border-slate-200/80 shadow-2xs rounded-lg flex items-center justify-center text-slate-500 group-hover:text-emerald-800 transition-colors">
+                  <i className="fas fa-book text-xs"></i>
+                </div>
+                <span className="inline-flex items-center gap-1 text-[8.5px] leading-none tracking-tight font-medium text-slate-400 group-hover:text-slate-500 bg-slate-200/50 px-1.5 py-0.5 rounded transition-colors whitespace-nowrap">
+                  <span className="w-1 h-1 rounded-full bg-amber-400 shrink-0"></span>
+                  Dalam Pembinaan
+                </span>
               </div>
               <div>
                 <p className="font-bold text-slate-900 text-xs mb-0.5">Garis Panduan</p>
@@ -229,10 +235,16 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
             {/* 3. Hub Sokongan */}
             <button 
               onClick={() => setShowSupport(true)}
-              className="group p-3.5 bg-slate-50 hover:bg-amber-50 border border-slate-200/70 hover:border-amber-200 rounded-xl transition-all text-left cursor-pointer flex flex-col justify-between"
+              className="group p-3.5 bg-slate-50 hover:bg-amber-50 border border-slate-200/70 hover:border-amber-200 rounded-xl transition-all text-left cursor-pointer flex flex-col justify-between relative overflow-hidden"
             >
-              <div className="w-8 h-8 bg-white border border-slate-200/80 shadow-2xs rounded-lg flex items-center justify-center text-slate-500 group-hover:text-amber-800 mb-2.5 transition-colors">
-                <i className="fas fa-headset text-xs"></i>
+              <div className="flex items-center justify-between w-full mb-2">
+                <div className="w-8 h-8 bg-white border border-slate-200/80 shadow-2xs rounded-lg flex items-center justify-center text-slate-500 group-hover:text-amber-800 transition-colors">
+                  <i className="fas fa-headset text-xs"></i>
+                </div>
+                <span className="inline-flex items-center gap-1 text-[8.5px] leading-none tracking-tight font-medium text-slate-400 group-hover:text-slate-500 bg-slate-200/50 px-1.5 py-0.5 rounded transition-colors whitespace-nowrap">
+                  <span className="w-1 h-1 rounded-full bg-amber-400 shrink-0"></span>
+                  Dalam Pembinaan
+                </span>
               </div>
               <div>
                 <p className="font-bold text-slate-900 text-xs mb-0.5">Hub Sokongan</p>
@@ -243,10 +255,16 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
             {/* 4. Templat Borang */}
             <button 
               onClick={() => setShowTemplates(true)}
-              className="group p-3.5 bg-slate-50 hover:bg-indigo-50 border border-slate-200/70 hover:border-indigo-200 rounded-xl transition-all text-left cursor-pointer flex flex-col justify-between"
+              className="group p-3.5 bg-slate-50 hover:bg-indigo-50 border border-slate-200/70 hover:border-indigo-200 rounded-xl transition-all text-left cursor-pointer flex flex-col justify-between relative overflow-hidden"
             >
-              <div className="w-8 h-8 bg-white border border-slate-200/80 shadow-2xs rounded-lg flex items-center justify-center text-slate-500 group-hover:text-indigo-800 mb-2.5 transition-colors">
-                <i className="fas fa-file-pdf text-xs"></i>
+              <div className="flex items-center justify-between w-full mb-2">
+                <div className="w-8 h-8 bg-white border border-slate-200/80 shadow-2xs rounded-lg flex items-center justify-center text-slate-500 group-hover:text-indigo-800 transition-colors">
+                  <i className="fas fa-file-pdf text-xs"></i>
+                </div>
+                <span className="inline-flex items-center gap-1 text-[8.5px] leading-none tracking-tight font-medium text-slate-400 group-hover:text-slate-500 bg-slate-200/50 px-1.5 py-0.5 rounded transition-colors whitespace-nowrap">
+                  <span className="w-1 h-1 rounded-full bg-amber-400 shrink-0"></span>
+                  Dalam Pembinaan
+                </span>
               </div>
               <div>
                 <p className="font-bold text-slate-900 text-xs mb-0.5">Templat Rasmi</p>
