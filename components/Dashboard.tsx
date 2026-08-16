@@ -14,6 +14,7 @@ interface DashboardProps {
   onCreateNew: () => void;
   onEditApplication?: (app: Application) => void;
   onUpdateApplication: (app: Application) => void;
+  resetKey?: number;
 }
 
 // Helper to check if an application can be edited by applicant (only in initial submitted/pending stages)
@@ -21,8 +22,13 @@ const canEditApplication = (app: Application) => {
   return app.status === ApplicationStatus.SUBMITTED || app.status === ApplicationStatus.SECRETARY_PENDING;
 };
 
-const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, onEditApplication, onUpdateApplication }) => {
+const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, onEditApplication, onUpdateApplication, resetKey }) => {
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
+
+  // When resetKey changes (e.g. user clicks the top nav "Senarai Kertas Kerja" button), reset back to main list
+  useEffect(() => {
+    setSelectedApp(null);
+  }, [resetKey]);
   const [showCompleted, setShowCompleted] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -479,14 +485,24 @@ const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, 
         {selectedApp && (
           <div className="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col min-h-[600px] print:border-0 print:shadow-none print:bg-white print:p-0">
             {/* Action Bar - Screen Only */}
-            <div className="p-6 border-b border-slate-100 flex justify-between items-start print:hidden">
-              <div>
-                <h3 className="text-xl font-bold text-slate-800">{selectedApp.researchTitle}</h3>
-                <p className="text-sm text-slate-500 mt-1">
-                  Dihantar {new Date(selectedApp.submissionDate).toLocaleDateString()} • Ruj: <span className="font-mono text-xs">{selectedApp.id?.toUpperCase() || 'N/A'}</span>
-                </p>
+            <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 print:hidden">
+              <div className="flex items-start gap-3">
+                <button
+                  onClick={() => setSelectedApp(null)}
+                  className="mt-0.5 p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all flex items-center gap-1.5 font-bold text-xs cursor-pointer shrink-0 border border-slate-300 shadow-2xs"
+                  title="Kembali ke Senarai Kertas Kerja"
+                >
+                  <i className="fas fa-arrow-left"></i>
+                  <span className="hidden sm:inline">Kembali</span>
+                </button>
+                <div>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-800 line-clamp-2">{selectedApp.researchTitle}</h3>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                    Dihantar {new Date(selectedApp.submissionDate).toLocaleDateString()} • Ruj: <span className="font-mono text-xs">{selectedApp.id?.toUpperCase() || 'N/A'}</span>
+                  </p>
+                </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
                 {onEditApplication && role === UserRole.APPLICANT && canEditApplication(selectedApp) && (
                   <button 
                     onClick={() => onEditApplication(selectedApp)}
@@ -512,7 +528,11 @@ const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, 
                   <i className="fas fa-print"></i>
                   <span className="text-xs font-bold uppercase hidden sm:inline">Cetak Laporan Penuh</span>
                 </button>
-                <button onClick={() => setSelectedApp(null)} className="text-slate-400 hover:text-slate-600 p-2 cursor-pointer">
+                <button 
+                  onClick={() => setSelectedApp(null)} 
+                  className="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition-all cursor-pointer"
+                  title="Tutup Paparan Perincian"
+                >
                   <i className="fas fa-times"></i>
                 </button>
               </div>

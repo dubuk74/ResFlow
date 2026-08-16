@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [applications, setApplications] = useState<Application[]>([]);
   const [currentView, setCurrentView] = useState<ViewType>('home');
   const [editingApp, setEditingApp] = useState<Application | null>(null);
+  const [dashboardResetKey, setDashboardResetKey] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isScriptModalOpen, setIsScriptModalOpen] = useState(false);
   const [isManualModalOpen, setIsManualModalOpen] = useState(false);
@@ -84,7 +85,12 @@ const App: React.FC = () => {
           <HomePortal 
             role={currentUserRole} 
             applications={applications} 
-            onNavigate={(view) => setCurrentView(view)} 
+            onNavigate={(view) => {
+              if (view === 'applications') {
+                setDashboardResetKey(k => k + 1);
+              }
+              setCurrentView(view);
+            }} 
             onOpenManual={() => setIsManualModalOpen(true)}
           />
         );
@@ -112,6 +118,7 @@ const App: React.FC = () => {
           <Dashboard 
             role={currentUserRole}
             applications={applications}
+            resetKey={dashboardResetKey}
             onCreateNew={() => {
               setEditingApp(null);
               setCurrentView('create');
@@ -194,7 +201,10 @@ const App: React.FC = () => {
               Portal Utama
             </button>
             <button 
-              onClick={() => setCurrentView('applications')}
+              onClick={() => {
+                setDashboardResetKey(k => k + 1);
+                setCurrentView('applications');
+              }}
               className={`text-xs font-bold flex items-center gap-2 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer whitespace-nowrap ${currentView === 'applications' ? 'text-white bg-blue-600 shadow-xs' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
             >
               <i className="fas fa-folder-open text-xs text-blue-400"></i>
