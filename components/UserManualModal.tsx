@@ -6,7 +6,7 @@ interface UserManualModalProps {
 }
 
 export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'applicant' | 'secretary' | 'examiner' | 'hod' | 'director' | 'gsheet'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'applicant' | 'secretary' | 'examiner' | 'hod' | 'director'>('overview');
 
   if (!isOpen) return null;
 
@@ -82,14 +82,6 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
             }`}
           >
             <i className="fas fa-award"></i> Timbalan Pengarah
-          </button>
-          <button
-            onClick={() => setActiveTab('gsheet')}
-            className={`px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
-              activeTab === 'gsheet' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-200'
-            }`}
-          >
-            <i className="fas fa-table"></i> Google Sheets
           </button>
         </div>
 
@@ -255,26 +247,6 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
                   <h5 className="font-bold text-indigo-800 text-xs">2. Keputusan Kelulusan Rasmi</h5>
                   <p className="text-xs">Pilih <strong>Diluluskan (Approved)</strong> atau <strong>Ditolak (Rejected)</strong>, masukkan ulasan rasmi pengarah dan simpan keputusan.</p>
                 </div>
-              </div>
-            </div>
-          )}
-
-          {/* GSHEET TAB */}
-          {activeTab === 'gsheet' && (
-            <div className="space-y-4">
-              <h4 className="font-extrabold text-slate-900 text-base">Integrasi Google Sheets & Apps Script</h4>
-              
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3 text-xs">
-                <p>Sistem ini menyelaraskan data permohonan secara langsung dengan fail Google Sheets anda melalui Google Apps Script Web App URL.</p>
-                
-                <div className="p-3 bg-white rounded-xl border border-slate-300 font-mono text-[11px] break-all">
-                  <strong>Pautan Deployment Terkini (E-mel & Google Sheets):</strong><br />
-                  https://script.google.com/macros/s/AKfycbzPT_CS87AfALJO02ri6UTsJIR6vg1Z58GU4bLJWp-N4ZIrcbho8Tb4KaHurzU0vTX7/exec
-                </div>
-
-                <p className="text-slate-600">
-                  Untuk melihat atau menyemak skrip Google Apps Script yang digunakan, anda boleh menekan butang <strong>"Skrip Google Sheets"</strong> di bahagian bawah (footer) aplikasi ini pada bila-bila masa.
-                </p>
               </div>
             </div>
           )}

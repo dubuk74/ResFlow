@@ -5,7 +5,6 @@ import Dashboard from './components/Dashboard';
 import ApplicationWizard from './components/ApplicationWizard';
 import HomePortal from './components/HomePortal';
 import RoleSwitcher from './components/RoleSwitcher';
-import { GoogleScriptModal } from './components/GoogleScriptModal';
 import { UserManualModal } from './components/UserManualModal';
 import { GoogleSheetService } from './services/googleSheetService';
 
@@ -18,7 +17,6 @@ const App: React.FC = () => {
   const [editingApp, setEditingApp] = useState<Application | null>(null);
   const [dashboardResetKey, setDashboardResetKey] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isScriptModalOpen, setIsScriptModalOpen] = useState(false);
   const [isManualModalOpen, setIsManualModalOpen] = useState(false);
 
   // Load data from Google Sheets on mount
@@ -269,27 +267,15 @@ const App: React.FC = () => {
               {GoogleSheetService.isEnabled() ? (
                 <span className="text-[10px] flex items-center gap-1.5 text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Pangkalan Data Aktif (Google Sheets)
+                  Pangkalan Data Aktif (Cloud Sync)
                 </span>
               ) : (
                 <span className="text-[10px] text-slate-400">Penyimpanan Tempatan Disimpan</span>
               )}
-              <button 
-                onClick={() => setIsScriptModalOpen(true)}
-                className="text-[10px] text-slate-600 hover:text-blue-900 font-semibold bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded transition-colors flex items-center gap-1.5 cursor-pointer"
-              >
-                <i className="fas fa-code text-slate-400"></i>
-                Integrasi Skrip
-              </button>
             </div>
           </div>
         </div>
       </footer>
-
-      <GoogleScriptModal 
-        isOpen={isScriptModalOpen} 
-        onClose={() => setIsScriptModalOpen(false)} 
-      />
 
       <UserManualModal 
         isOpen={isManualModalOpen} 
