@@ -4,6 +4,22 @@ import { Application, ApplicationStatus, ReviewRating } from '../types';
 // IMPORTANT: Replace this with your NEW deployment URL from Google Apps Script
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzPT_CS87AfALJO02ri6UTsJIR6vg1Z58GU4bLJWp-N4ZIrcbho8Tb4KaHurzU0vTX7/exec'; 
 
+// Ensure phone number starts with '0'
+export const formatPhoneWithZero = (phone: any): string => {
+  if (!phone) return '-';
+  let str = String(phone).trim();
+  if (!str || str === '-' || str === 'null' || str === 'undefined') return '-';
+  str = str.replace(/^'+/, ''); // remove any leading quote
+  if (str.startsWith('+60')) {
+    str = '0' + str.slice(3);
+  } else if (str.startsWith('60') && str.length > 8) {
+    str = '0' + str.slice(2);
+  } else if (/^[1-9]/.test(str)) {
+    str = '0' + str;
+  }
+  return str;
+};
+
 // Parse human-readable review string from Google Sheet cell if JSON is not present
 const parseReviewsText = (text: string): Record<string, any> => {
   if (!text || typeof text !== 'string' || text === 'Belum ada penilaian') return {};
@@ -109,7 +125,7 @@ export const GoogleSheetService = {
         const applicantName = item.applicantName || 'Pemohon';
         const applicantIdCard = item.applicantIdCard || '-';
         const applicantEmail = item.applicantEmail || '-';
-        const applicantPhone = item.applicantPhone || '-';
+        const applicantPhone = formatPhoneWithZero(item.applicantPhone);
         const teamName = item.teamName || 'Pasukan Penyelidik';
         
         const researchTitle = item.researchTitle || 'Penyelidikan Tanpa Tajuk';
@@ -282,7 +298,7 @@ export const GoogleSheetService = {
         applicantName: app.applicantName,
         applicantIdCard: app.applicantIdCard,
         applicantEmail: app.applicantEmail,
-        applicantPhone: app.applicantPhone,
+        applicantPhone: formatPhoneWithZero(app.applicantPhone) === '-' ? '' : formatPhoneWithZero(app.applicantPhone),
         teamName: app.teamName,
         teamMembers: teamMembersText,
         researchTitle: app.researchTitle,

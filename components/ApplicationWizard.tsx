@@ -8,6 +8,24 @@ interface ApplicationWizardProps {
   onSubmit: (app: Application) => void;
 }
 
+// Helper function to format and enforce phone numbers starting with '0'
+export const enforceLeadingZeroPhone = (val: string): string => {
+  if (!val) return '';
+  let str = val.trim();
+  // Strip non-digit and non-hyphen/plus characters
+  str = str.replace(/[^\d+-]/g, '');
+  
+  if (str.startsWith('+60')) {
+    str = '0' + str.slice(3);
+  } else if (str.startsWith('60') && str.length > 8) {
+    str = '0' + str.slice(2);
+  } else if (/^[1-9]/.test(str)) {
+    // Automatically prepend 0 if starts with 1-9
+    str = '0' + str;
+  }
+  return str;
+};
+
 const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCancel, onSubmit }) => {
   const isEditing = !!initialData;
   const [step, setStep] = useState(1);
@@ -15,7 +33,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
     applicantName: initialData?.applicantName || '',
     applicantIdCard: initialData?.applicantIdCard || '',
     applicantEmail: initialData?.applicantEmail || '',
-    applicantPhone: initialData?.applicantPhone || '',
+    applicantPhone: initialData?.applicantPhone ? enforceLeadingZeroPhone(initialData.applicantPhone) : '',
     teamName: initialData?.teamName || '',
     researchTitle: initialData?.researchTitle || '',
     researchLink: initialData?.researchLink || '',
@@ -50,7 +68,15 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Ensure phone number starts with 0
+    let cleanPhone = enforceLeadingZeroPhone(formData.applicantPhone);
+    if (!cleanPhone.startsWith('0') && cleanPhone.length > 0) {
+      cleanPhone = '0' + cleanPhone;
+    }
+
     if (step < 4) {
+      setFormData(prev => ({ ...prev, applicantPhone: cleanPhone }));
       setStep(prev => prev + 1);
       return;
     }
@@ -62,9 +88,11 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
     const app: Application = isEditing && initialData ? {
       ...initialData,
       ...formData,
+      applicantPhone: cleanPhone,
       targetCommittee: selectedCommittee,
     } : {
       ...formData,
+      applicantPhone: cleanPhone,
       id: Math.random().toString(36).substr(2, 9),
       submissionDate: new Date().toISOString(),
       status: ApplicationStatus.SECRETARY_PENDING,
@@ -123,8 +151,36 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
                 <input required type="email" value={formData.applicantEmail} onChange={e => setFormData({...formData, applicantEmail: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Nombor Telefon</label>
-                <input required value={formData.applicantPhone} onChange={e => setFormData({...formData, applicantPhone: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" />
+                <div className="flex justify-between items-center">
+                  <label className="text-xs font-bold text-slate-500 uppercase">Nombor Telefon</label>
+                  <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100">Bermula digit 0</span>
+                </div>
+                <input 
+                  required 
+                  type="tel"
+                  placeholder="Contoh: 012-3456789 atau 011-12345678"
+                  value={formData.applicantPhone} 
+                  onChange={e => {
+                    let val = e.target.value;
+                    // Auto-fix if user starts typing non-zero digits like 12... -> 012...
+                    if (/^[1-9]/.test(val) && !val.startsWith('0')) {
+                      val = '0' + val;
+                    } else if (val.startsWith('+60')) {
+                      val = '0' + val.slice(3);
+                    } else if (val.startsWith('60') && val.length > 8) {
+                      val = '0' + val.slice(2);
+                    }
+                    setFormData({...formData, applicantPhone: val});
+                  }} 
+                  onBlur={e => {
+                    const formatted = enforceLeadingZeroPhone(e.target.value);
+                    setFormData({...formData, applicantPhone: formatted});
+                  }}
+                  className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" 
+                />
+                <p className="text-[11px] text-slate-500 font-medium">
+                  Pastikan nombor telefon dimulakan dengan angka <strong>0</strong> (cth: 012-3456789 / 019-1234567).
+                </p>
               </div>
             </div>
           </div>

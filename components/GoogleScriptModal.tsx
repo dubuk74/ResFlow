@@ -107,7 +107,15 @@ function doGet(e) {
       const obj = {};
       headers.forEach((header, colIndex) => {
         if (header) {
-          obj[header] = row[colIndex] !== undefined && row[colIndex] !== null ? row[colIndex] : "";
+          let val = row[colIndex] !== undefined && row[colIndex] !== null ? row[colIndex] : "";
+          if (header === "applicantPhone" && val) {
+            let str = String(val).trim().replace(/^'+/, "");
+            if (str && !str.startsWith("0") && !str.startsWith("+")) {
+              str = "0" + str;
+            }
+            val = str;
+          }
+          obj[header] = val;
         }
       });
       return obj;
@@ -192,6 +200,13 @@ function doPost(e) {
         }
       }
       if (val !== undefined && val !== null) {
+        if (header === "applicantPhone" && val !== "") {
+          let pStr = String(val).trim().replace(/^'+/, "");
+          if (pStr && !pStr.startsWith("0") && !pStr.startsWith("+")) {
+            pStr = "0" + pStr;
+          }
+          return "'" + pStr;
+        }
         return typeof val === 'object' ? JSON.stringify(val) : String(val);
       }
       return "";

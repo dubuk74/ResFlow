@@ -178,37 +178,61 @@ export const HodDashboard: React.FC<HodDashboardProps> = ({
           </div>
         </div>
 
-        {/* Global Stats Counter categorized by JK */}
+        {/* Global Stats Counter categorized by JK - Clickable Filter Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-6 border-t border-white/10">
-          <div className="bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-xl font-black">
+          <button
+            onClick={() => setActiveTab('MJPKKM')}
+            className={`rounded-2xl p-4 border flex items-center gap-4 text-left transition-all cursor-pointer ${
+              activeTab === 'MJPKKM'
+                ? 'bg-teal-600/30 border-teal-400 ring-2 ring-teal-400 shadow-lg'
+                : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+            }`}
+            title="Klik untuk lihat senarai JK MJPKKM"
+          >
+            <div className="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-xl font-black shrink-0">
               🔬
             </div>
             <div>
               <p className="text-xs text-teal-200 font-bold uppercase tracking-wider">JK MJPKKM</p>
               <p className="text-2xl font-black text-white">{pendingMjpxkm.length} <span className="text-xs font-normal text-teal-300">menunggu perakuan</span></p>
             </div>
-          </div>
+          </button>
 
-          <div className="bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xl font-black">
+          <button
+            onClick={() => setActiveTab('INOVASI')}
+            className={`rounded-2xl p-4 border flex items-center gap-4 text-left transition-all cursor-pointer ${
+              activeTab === 'INOVASI'
+                ? 'bg-amber-600/30 border-amber-400 ring-2 ring-amber-400 shadow-lg'
+                : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+            }`}
+            title="Klik untuk lihat senarai JK INOVASI"
+          >
+            <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xl font-black shrink-0">
               💡
             </div>
             <div>
               <p className="text-xs text-teal-200 font-bold uppercase tracking-wider">JK INOVASI</p>
               <p className="text-2xl font-black text-white">{pendingInovasi.length} <span className="text-xs font-normal text-teal-300">menunggu perakuan</span></p>
             </div>
-          </div>
+          </button>
 
-          <div className="bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-xl font-black">
+          <button
+            onClick={() => setActiveTab('COMPLETED')}
+            className={`rounded-2xl p-4 border flex items-center gap-4 text-left transition-all cursor-pointer ${
+              activeTab === 'COMPLETED'
+                ? 'bg-emerald-600/30 border-emerald-400 ring-2 ring-emerald-400 shadow-lg'
+                : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+            }`}
+            title="Klik untuk lihat rekod disahkan"
+          >
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-xl font-black shrink-0">
               ✓
             </div>
             <div>
               <p className="text-xs text-teal-200 font-bold uppercase tracking-wider">Telah Disahkan</p>
               <p className="text-2xl font-black text-white">{completedApps.length} <span className="text-xs font-normal text-teal-300">rekod</span></p>
             </div>
-          </div>
+          </button>
         </div>
       </div>
 
@@ -450,29 +474,39 @@ export const HodDashboard: React.FC<HodDashboardProps> = ({
                   </div>
                 </div>
 
-                {/* Prominent Google Drive Paper Button */}
-                <div className="bg-teal-50/80 border-2 border-teal-200 rounded-2xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                {/* Prominent Action Banner for Paper & Complete Report */}
+                <div className="bg-teal-50/80 border-2 border-teal-200 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg font-bold shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-teal-700 text-white flex items-center justify-center text-lg font-bold shrink-0 shadow-sm">
                       📄
                     </div>
                     <div>
-                      <h4 className="text-sm font-black text-teal-950">Dokumen Kertas Penyelidikan / Inovasi</h4>
+                      <h4 className="text-sm font-black text-teal-950">Semakan Kertas Penyelidikan & Laporan Lengkap</h4>
                       <p className="text-xs text-teal-700 font-medium">
-                        Buka pautan Google Drive untuk menyemak isi kandungan dokumen sebelum membuat perakuan.
+                        Buka pautan Google Drive atau semak borang laporan lengkap beserta rubrik pemarkahan dan ulasan.
                       </p>
                     </div>
                   </div>
 
-                  <a
-                    href={app.researchLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-full sm:w-auto bg-teal-700 hover:bg-teal-800 text-white text-sm font-black px-5 py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0"
-                  >
-                    <span>Buka Dokumen (Google Drive)</span>
-                    <i className="fas fa-external-link-alt text-xs"></i>
-                  </a>
+                  <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0">
+                    <button
+                      onClick={() => setReportApp(app)}
+                      className="w-full sm:w-auto bg-white hover:bg-teal-50 text-teal-950 border-2 border-teal-300 hover:border-teal-400 text-xs sm:text-sm font-black px-4 py-2.5 rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0"
+                    >
+                      <i className="fas fa-file-invoice text-teal-700 text-sm"></i>
+                      <span>Lihat Laporan Lengkap</span>
+                    </button>
+
+                    <a
+                      href={app.researchLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="w-full sm:w-auto bg-teal-700 hover:bg-teal-800 text-white text-xs sm:text-sm font-black px-4 py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0"
+                    >
+                      <span>Buka Google Drive</span>
+                      <i className="fas fa-external-link-alt text-xs"></i>
+                    </a>
+                  </div>
                 </div>
 
                 {/* Key Summary Grid: Pemohon, Penilai, and Secretary Status */}
@@ -550,9 +584,10 @@ export const HodDashboard: React.FC<HodDashboardProps> = ({
                     <div className="flex gap-2 shrink-0">
                       <button
                         onClick={() => setReportApp(app)}
-                        className="bg-white text-slate-800 hover:bg-slate-100 text-xs font-black px-3 py-2 rounded-xl border border-slate-300 shadow-sm cursor-pointer"
+                        className="bg-white hover:bg-slate-50 text-slate-800 text-xs font-black px-4 py-2.5 rounded-xl border-2 border-slate-300 shadow-xs hover:shadow transition-all flex items-center gap-2 cursor-pointer"
                       >
-                        <i className="fas fa-print mr-1"></i> Cetak Laporan
+                        <i className="fas fa-file-invoice text-teal-700"></i>
+                        <span>Lihat & Cetak Laporan Lengkap</span>
                       </button>
                     </div>
                   </div>
@@ -560,14 +595,14 @@ export const HodDashboard: React.FC<HodDashboardProps> = ({
 
                 {/* Big Action Buttons for Pending HOD Decision */}
                 {!app.hodStatus && (
-                  <div className="pt-2 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                  <div className="pt-3 border-t border-slate-200/80 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 bg-slate-50/50 p-3.5 rounded-2xl border border-slate-100">
                     <div>
                       <button
                         onClick={() => setReportApp(app)}
-                        className="text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3.5 py-2.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer"
+                        className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm px-5 py-3 rounded-2xl shadow-md hover:shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2.5 cursor-pointer min-h-[48px]"
                       >
-                        <i className="fas fa-file-invoice"></i>
-                        <span>Lihat Laporan Lengkap</span>
+                        <i className="fas fa-file-invoice text-base text-blue-100"></i>
+                        <span className="tracking-wide">LIHAT LAPORAN LENGKAP</span>
                       </button>
                     </div>
 
