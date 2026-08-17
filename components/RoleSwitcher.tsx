@@ -88,36 +88,35 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
     onRoleChange(role);
   };
 
-  const renderOption = (role: UserRole, label: string, icon: string) => {
+  const renderOption = (role: UserRole, label: string) => {
     const count = getCount(role);
     return (
       <option key={role} value={role}>
-        {icon} {label} {count > 0 ? `(${count})` : ''} {!authenticatedRoles[role] ? '🔒' : ''}
+        {label} {count > 0 ? `(${count})` : ''} {!authenticatedRoles[role] ? '🔒' : ''}
       </option>
     );
   };
 
   return (
     <>
-      <div className="relative flex flex-wrap items-center gap-1.5 sm:gap-2 shrink-0">
+      <div className="relative flex flex-wrap items-center gap-1.5 sm:gap-2">
         {/* 1. DEDICATED SEPARATE TIMBALAN PENGARAH BUTTON */}
         <button
           type="button"
           onClick={() => handleSelectRole(UserRole.DIRECTOR)}
-          className={`px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs shrink-0 whitespace-nowrap ${
+          className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs whitespace-nowrap shrink-0 ${
             isDirectorActive
               ? 'bg-slate-900 text-white ring-2 ring-indigo-500 shadow-indigo-900/20'
-              : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 hover:border-indigo-300'
+              : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-950 border border-indigo-200 hover:border-indigo-300'
           }`}
           title="Buka Dashboard Timbalan Pengarah (Dilindungi Kata Laluan)"
         >
-          <span className="text-sm">🎓</span>
-          <span>Timbalan Pengarah</span>
+          <span className="inline-block">Timbalan Pengarah</span>
           {!authenticatedRoles[UserRole.DIRECTOR] && !isDirectorActive && (
-            <i className="fas fa-lock text-[10px] text-indigo-400 opacity-70"></i>
+            <i className="fas fa-lock text-[10px] text-indigo-400 opacity-80 shrink-0"></i>
           )}
           {directorCount > 0 && (
-            <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black shrink-0 ${
               isDirectorActive ? 'bg-amber-400 text-slate-950' : 'bg-indigo-600 text-white animate-pulse'
             }`}>
               {directorCount}
@@ -129,20 +128,19 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
         <button
           type="button"
           onClick={() => handleSelectRole(UserRole.HOD)}
-          className={`px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs shrink-0 whitespace-nowrap ${
+          className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs whitespace-nowrap shrink-0 ${
             isHodActive
               ? 'bg-teal-900 text-white ring-2 ring-teal-400 shadow-teal-900/20'
-              : 'bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-200 hover:border-teal-300'
+              : 'bg-teal-50 hover:bg-teal-100 text-teal-950 border border-teal-200 hover:border-teal-300'
           }`}
           title="Buka Dashboard Ketua Jabatan (Dilindungi Kata Laluan)"
         >
-          <span className="text-sm">🏢</span>
-          <span>Ketua Jabatan</span>
+          <span className="inline-block">Ketua Jabatan</span>
           {!authenticatedRoles[UserRole.HOD] && !isHodActive && (
-            <i className="fas fa-lock text-[10px] text-teal-500 opacity-70"></i>
+            <i className="fas fa-lock text-[10px] text-teal-500 opacity-80 shrink-0"></i>
           )}
           {hodCount > 0 && (
-            <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black ${
+            <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-black shrink-0 ${
               isHodActive ? 'bg-amber-400 text-slate-950' : 'bg-teal-600 text-white animate-pulse'
             }`}>
               {hodCount}
@@ -154,22 +152,21 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
         <button
           type="button"
           onClick={() => handleSelectRole(UserRole.APPLICANT)}
-          className={`px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs shrink-0 whitespace-nowrap ${
+          className={`px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl sm:rounded-full text-xs sm:text-sm font-extrabold transition-all inline-flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-xs whitespace-nowrap shrink-0 ${
             isApplicantActive
               ? 'bg-blue-700 text-white ring-2 ring-blue-400 shadow-blue-700/20'
-              : 'bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 hover:border-blue-300'
+              : 'bg-blue-50 hover:bg-blue-100 text-blue-950 border border-blue-200 hover:border-blue-300'
           }`}
           title="Buka Portal & Permohonan Pemohon"
         >
-          <span className="text-sm">👤</span>
-          <span>Pemohon</span>
+          <span className="inline-block">Pemohon</span>
         </button>
 
         {/* Divider */}
-        <div className="h-6 w-[1px] bg-slate-200 hidden sm:block"></div>
+        <div className="h-6 w-[1px] bg-slate-200 hidden sm:block shrink-0"></div>
 
         {/* 4. URUS SETIA & PENILAI DROPDOWN */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="inline-flex items-center gap-2 shrink-0">
           <div className="relative group">
             <select 
               value={isDropdownActive ? currentRole : ''}
@@ -178,7 +175,7 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
                   handleSelectRole(e.target.value as UserRole);
                 }
               }}
-              className={`appearance-none rounded-full px-3 py-1.5 sm:px-4 sm:py-2 pr-8 sm:pr-9 text-xs sm:text-sm font-medium cursor-pointer transition-all outline-none border shrink-0 whitespace-nowrap ${
+              className={`appearance-none rounded-xl sm:rounded-full px-3 py-1.5 sm:px-4 sm:py-2 pr-8 sm:pr-9 text-xs sm:text-sm font-medium cursor-pointer transition-all outline-none border shrink-0 whitespace-nowrap ${
                 isDropdownActive
                   ? 'bg-indigo-900 border-indigo-700 text-white font-bold ring-2 ring-indigo-400'
                   : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
@@ -186,16 +183,16 @@ const RoleSwitcher: React.FC<RoleSwitcherProps> = ({ currentRole, onRoleChange, 
             >
               {!isDropdownActive && (
                 <option value="" disabled>
-                  📋 Urus Setia / Penilai...
+                  Urus Setia / Penilai...
                 </option>
               )}
               <optgroup label="Urus Setia (Setiausaha)">
-                {renderOption(UserRole.SECRETARY_1, 'Setiausaha JK MJPKKM', '📋')}
-                {renderOption(UserRole.SECRETARY_2, 'Setiausaha JK INOVASI', '📋')}
+                {renderOption(UserRole.SECRETARY_1, 'Setiausaha JK MJPKKM')}
+                {renderOption(UserRole.SECRETARY_2, 'Setiausaha JK INOVASI')}
               </optgroup>
               <optgroup label="Panel Penilai">
-                {renderOption(UserRole.REVIEWER_1, 'Penilai JK MJPKKM', '🔍')}
-                {renderOption(UserRole.REVIEWER_2, 'Penilai JK INOVASI', '🔍')}
+                {renderOption(UserRole.REVIEWER_1, 'Penilai JK MJPKKM')}
+                {renderOption(UserRole.REVIEWER_2, 'Penilai JK INOVASI')}
               </optgroup>
             </select>
             <div className={`absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none ${isDropdownActive ? 'text-white' : 'text-slate-400'}`}>

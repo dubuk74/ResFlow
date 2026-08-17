@@ -136,7 +136,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans text-slate-800 antialiased">
       {/* Top Institutional Header - Hidden on Print */}
-      <header className="bg-white border-b border-slate-200/90 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3 lg:gap-5 sticky top-0 z-50 shadow-xs print:hidden">
+      <header className="bg-white border-b border-slate-200/90 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-3.5 xl:gap-6 sticky top-0 z-50 shadow-xs print:hidden">
         <div 
           onClick={() => setCurrentView('home')}
           className="flex items-center gap-3 sm:gap-4 lg:gap-5 cursor-pointer group select-none shrink-0"
@@ -148,7 +148,7 @@ const App: React.FC = () => {
               alt="KMPk Logo" 
               referrerPolicy="no-referrer"
               loading="eager"
-              className="h-14 sm:h-16 md:h-18 lg:h-20 w-auto object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105 shrink-0"
+              className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-105 shrink-0"
             />
           </div>
           <div className="border-l-2 border-slate-200 pl-3 sm:pl-4">
@@ -172,9 +172,9 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3 w-full lg:w-auto justify-between lg:justify-end overflow-x-auto pb-1 lg:pb-0">
+        <div className="flex items-center gap-2 sm:gap-3 w-full xl:w-auto justify-start xl:justify-end overflow-x-visible flex-wrap">
           {!GoogleSheetService.isEnabled() && (
-            <div className="hidden xl:flex items-center gap-1.5 bg-amber-50 text-amber-800 px-3 py-1.5 rounded-lg border border-amber-200/80 text-[11px] font-bold shrink-0">
+            <div className="hidden 2xl:flex items-center gap-1.5 bg-amber-50 text-amber-800 px-3 py-1.5 rounded-lg border border-amber-200/80 text-[11px] font-bold shrink-0">
               <i className="fas fa-database text-amber-600"></i>
               MOD TEMPATAN (Offline Storage)
             </div>
