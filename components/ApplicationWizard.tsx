@@ -148,17 +148,23 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold text-slate-500 uppercase">E-mel Rasmi</label>
-                <input required type="email" value={formData.applicantEmail} onChange={e => setFormData({...formData, applicantEmail: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" />
-              </div>
-              <div className="space-y-1">
-                <div className="flex justify-between items-center">
-                  <label className="text-xs font-bold text-slate-500 uppercase">Nombor Telefon</label>
-                  <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100">Bermula digit 0</span>
-                </div>
                 <input 
                   required 
-                  type="tel"
-                  placeholder="Contoh: 012-3456789 atau 011-12345678"
+                  type="email" 
+                  value={formData.applicantEmail} 
+                  onChange={e => setFormData({...formData, applicantEmail: e.target.value.trim()})} 
+                  className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none text-slate-800" 
+                />
+                <p className="text-[11px] text-amber-700 bg-amber-50/80 border border-amber-200/70 rounded-md p-1.5 flex items-start gap-1.5 leading-snug">
+                  <i className="fas fa-info-circle text-amber-600 mt-0.5 shrink-0 text-xs"></i>
+                  <span>Sila semak alamat e-mel ditulis dengan betul bagi memastikan notifikasi status permohonan dihantar.</span>
+                </p>
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-500 uppercase">Nombor Telefon</label>
+                <input 
+                  required 
+                  type="tel" 
                   value={formData.applicantPhone} 
                   onChange={e => {
                     let val = e.target.value;
