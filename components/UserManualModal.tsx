@@ -149,7 +149,7 @@ export const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClos
               <div className="space-y-3">
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
                   <h5 className="font-bold text-indigo-600 text-xs">1. Menghantar Permohonan Baharu</h5>
-                  <p className="text-xs">Klik butang <strong>"Penyerahan Baharu"</strong> di bahagian atas portal. Pilih Jawatankuasa Sasaran (JK Penyelidikan atau JK Inovasi), isi maklumat peribadi/pasukan, maklumat acara (Kebangsaan / Antarabangsa Dalam Negeri / Antarabangsa Luar Negeri), dan pautan dokumen penyelidikan.</p>
+                  <p className="text-xs">Klik butang <strong>"Penyerahan Baharu"</strong> di bahagian atas portal. Pilih Jawatankuasa Sasaran (JK Penyelidikan atau JK Inovasi), isi maklumat peribadi/pasukan, maklumat acara (Negeri / Kebangsaan / Antarabangsa Dalam Negara / Antarabangsa Luar Negara), dan pautan dokumen penyelidikan.</p>
                 </div>
 
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">

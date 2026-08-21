@@ -230,8 +230,8 @@ export const ReportModal: React.FC<ReportModalProps> = ({ app, onClose, initialT
                       {app.eventLevel ? `PERINGKAT ${
                         app.eventLevel === 'State' ? 'NEGERI' :
                         app.eventLevel === 'National' ? 'KEBANGSAAN' :
-                        app.eventLevel === 'International (Dalam Negeri)' ? 'ANTARABANGSA (DALAM NEGERI)' :
-                        app.eventLevel === 'International (Luar Negeri)' ? 'ANTARABANGSA (LUAR NEGERI)' :
+                        (app.eventLevel === 'International (Dalam Negara)' || app.eventLevel === 'International (Dalam Negeri)') ? 'ANTARABANGSA (DALAM NEGARA)' :
+                        (app.eventLevel === 'International (Luar Negara)' || app.eventLevel === 'International (Luar Negeri)') ? 'ANTARABANGSA (LUAR NEGARA)' :
                         'ANTARABANGSA'
                       }` : 'N/A'}
                       {app.eventDate ? ` (${new Date(app.eventDate).toLocaleDateString('ms-MY')}${app.eventEndDate ? ` hingga ${new Date(app.eventEndDate).toLocaleDateString('ms-MY')}` : ''})` : ''}
@@ -367,8 +367,8 @@ export const ReportModal: React.FC<ReportModalProps> = ({ app, onClose, initialT
                       {app.eventName || 'N/A'} {app.eventLevel ? `(${
                         app.eventLevel === 'State' ? 'Negeri' :
                         app.eventLevel === 'National' ? 'Kebangsaan' :
-                        app.eventLevel === 'International (Dalam Negeri)' ? 'Antarabangsa (Dalam Negeri)' :
-                        app.eventLevel === 'International (Luar Negeri)' ? 'Antarabangsa (Luar Negeri)' :
+                        (app.eventLevel === 'International (Dalam Negara)' || app.eventLevel === 'International (Dalam Negeri)') ? 'Antarabangsa (Dalam Negara)' :
+                        (app.eventLevel === 'International (Luar Negara)' || app.eventLevel === 'International (Luar Negeri)') ? 'Antarabangsa (Luar Negara)' :
                         'Antarabangsa'
                       })` : ''}
                     </span>

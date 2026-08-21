@@ -41,7 +41,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
     eventLocation: initialData?.eventLocation || '',
     eventDate: initialData?.eventDate || '',
     eventEndDate: initialData?.eventEndDate || '',
-    eventLevel: (initialData?.eventLevel || 'State') as 'State' | 'National' | 'International (Dalam Negeri)' | 'International (Luar Negeri)' | 'International',
+    eventLevel: (initialData?.eventLevel || 'State') as 'State' | 'National' | 'International (Dalam Negara)' | 'International (Luar Negara)' | 'International (Dalam Negeri)' | 'International (Luar Negeri)' | 'International',
     teamMembers: initialData?.teamMembers || [],
     selectedReviewers: initialData?.selectedReviewers?.length 
       ? initialData.selectedReviewers 
@@ -248,7 +248,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
                 <input required value={formData.researchTitle} onChange={e => setFormData({...formData, researchTitle: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-500 uppercase">Pautan Kertas Atas Talian</label>
+                <label className="text-xs font-bold text-slate-500 uppercase">Pautan kepada salinan digital Kertas Kajian/ Inovasi/ Poster/ Video untuk penilaian</label>
                 <input required type="url" value={formData.researchLink} onChange={e => setFormData({...formData, researchLink: e.target.value})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="https://..." />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
@@ -273,8 +273,8 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
                   <select value={formData.eventLevel} onChange={e => setFormData({...formData, eventLevel: e.target.value as any})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
                     <option value="State">Negeri</option>
                     <option value="National">Kebangsaan</option>
-                    <option value="International (Dalam Negeri)">Antarabangsa (Dalam Negeri)</option>
-                    <option value="International (Luar Negeri)">Antarabangsa (Luar Negeri)</option>
+                    <option value="International (Dalam Negara)">Antarabangsa (Dalam Negara)</option>
+                    <option value="International (Luar Negara)">Antarabangsa (Luar Negara)</option>
                   </select>
                 </div>
               </div>

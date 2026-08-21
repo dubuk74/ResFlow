@@ -58,7 +58,7 @@ export interface Application {
   eventLocation: string;
   eventDate: string;
   eventEndDate?: string;
-  eventLevel: 'State' | 'National' | 'International (Dalam Negeri)' | 'International (Luar Negeri)' | 'International';
+  eventLevel: 'State' | 'National' | 'International (Dalam Negara)' | 'International (Luar Negara)' | 'International (Dalam Negeri)' | 'International (Luar Negeri)' | 'International';
   
   // Event Achievement & Award Info
   achievementStatus?: string;

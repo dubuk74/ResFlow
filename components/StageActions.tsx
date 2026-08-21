@@ -438,8 +438,8 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
             {app.eventName} ({
               app.eventLevel === 'State' ? 'Negeri' :
               app.eventLevel === 'National' ? 'Kebangsaan' :
-              app.eventLevel === 'International (Dalam Negeri)' ? 'Antarabangsa (Dalam Negeri)' :
-              app.eventLevel === 'International (Luar Negeri)' ? 'Antarabangsa (Luar Negeri)' :
+              (app.eventLevel === 'International (Dalam Negara)' || app.eventLevel === 'International (Dalam Negeri)') ? 'Antarabangsa (Dalam Negara)' :
+              (app.eventLevel === 'International (Luar Negara)' || app.eventLevel === 'International (Luar Negeri)') ? 'Antarabangsa (Luar Negara)' :
               'Antarabangsa'
             })
           </p>

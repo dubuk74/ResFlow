@@ -212,8 +212,8 @@ export const GoogleSheetService = {
           eventLocation,
           eventDate,
           eventEndDate: item.eventEndDate || '',
-          eventLevel: (eventLevel === 'State' || eventLevel === 'International (Dalam Negeri)' || eventLevel === 'International (Luar Negeri)' || eventLevel === 'International') 
-            ? eventLevel 
+          eventLevel: (eventLevel === 'State' || eventLevel === 'International (Dalam Negara)' || eventLevel === 'International (Luar Negara)' || eventLevel === 'International (Dalam Negeri)' || eventLevel === 'International (Luar Negeri)' || eventLevel === 'International') 
+            ? (eventLevel === 'International (Dalam Negeri)' ? 'International (Dalam Negara)' : eventLevel === 'International (Luar Negeri)' ? 'International (Luar Negara)' : eventLevel)
             : (eventLevel === 'Negeri' ? 'State' : 'National'),
           submissionDate,
           status,
