@@ -81,19 +81,67 @@ const parseTeamMembersText = (text: string): any[] => {
 // Track in-flight and recent saves to prevent duplicate consecutive HTTP requests and multiple emails
 const recentSaveSignatures = new Map<string, number>();
 
+// In-memory cache to prevent data wiping when transient network errors occur
+let cachedApplications: Application[] = [];
+let lastSyncTimestamp: Date | null = null;
+let lastSyncError: string | null = null;
+
+export interface CloudSyncResult {
+  success: boolean;
+  data: Application[];
+  error: string | null;
+  timestamp: Date;
+  isCachedFallback?: boolean;
+}
+
 export const GoogleSheetService = {
   isEnabled: () => SCRIPT_URL.length > 0 && !SCRIPT_URL.includes('your-actual-url'),
 
-  fetchAll: async (): Promise<Application[]> => {
-    if (!SCRIPT_URL || SCRIPT_URL.includes('your-actual-url')) return [];
+  getEndpointUrl: () => SCRIPT_URL,
+
+  getLastSyncInfo: () => ({
+    timestamp: lastSyncTimestamp,
+    error: lastSyncError,
+    cachedCount: cachedApplications.length
+  }),
+
+  fetchAllWithStatus: async (): Promise<CloudSyncResult> => {
+    if (!SCRIPT_URL || SCRIPT_URL.includes('your-actual-url')) {
+      const err = 'URL Google Apps Script belum dikonfigurasikan.';
+      lastSyncError = err;
+      return { success: false, data: [], error: err, timestamp: new Date() };
+    }
+
     try {
-      const response = await fetch(`${SCRIPT_URL}?t=${Date.now()}`);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 20000); // 20s timeout
+
+      const response = await fetch(`${SCRIPT_URL}?t=${Date.now()}`, {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
-        console.warn('Google Sheet Service: URL returned an error.');
-        return [];
+        throw new Error(`Google Apps Script returned HTTP ${response.status}: ${response.statusText}`);
       }
+
       const rawData = await response.json();
-      if (!Array.isArray(rawData) || rawData.length === 0) return [];
+
+      // Check if Apps Script returned an error payload: { status: 'error', message: '...' }
+      if (rawData && typeof rawData === 'object' && !Array.isArray(rawData) && rawData.status === 'error') {
+        throw new Error(rawData.message || 'Ralat dari Google Apps Script.');
+      }
+
+      if (!Array.isArray(rawData)) {
+        throw new Error('Format data tidak sah: Jangkaan senarai data array dari Google Sheets.');
+      }
+
+      if (rawData.length === 0) {
+        lastSyncTimestamp = new Date();
+        lastSyncError = null;
+        cachedApplications = [];
+        return { success: true, data: [], error: null, timestamp: lastSyncTimestamp };
+      }
 
       let items: any[] = [];
 
@@ -118,7 +166,7 @@ export const GoogleSheetService = {
         items = rawData;
       }
 
-      return items.map((rawItem: any) => {
+      const parsedList: Application[] = items.map((rawItem: any) => {
         const item = rawItem || {};
 
         const id = item.id || `APP-${Math.floor(Math.random() * 899999 + 100000)}`;
@@ -241,10 +289,37 @@ export const GoogleSheetService = {
           achievementDate
         };
       });
-    } catch (error) {
-      console.error('Sheet Fetch Error:', error);
-      return [];
+
+      cachedApplications = parsedList;
+      lastSyncTimestamp = new Date();
+      lastSyncError = null;
+
+      return {
+        success: true,
+        data: parsedList,
+        error: null,
+        timestamp: lastSyncTimestamp
+      };
+    } catch (error: any) {
+      console.error('Google Sheet Fetch Error:', error);
+      const errorMessage = error?.message || 'Gagal menyambung ke Google Sheets (Ralat Rangkaian / Timeout).';
+      lastSyncError = errorMessage;
+
+      // If we have existing cached applications from this session, keep them so user doesn't lose sight of data,
+      // but clearly indicate that this sync failed
+      return {
+        success: false,
+        data: cachedApplications,
+        error: errorMessage,
+        timestamp: new Date(),
+        isCachedFallback: cachedApplications.length > 0
+      };
     }
+  },
+
+  fetchAll: async (): Promise<Application[]> => {
+    const res = await GoogleSheetService.fetchAllWithStatus();
+    return res.data;
   },
 
   saveOrUpdate: async (app: Application): Promise<boolean> => {

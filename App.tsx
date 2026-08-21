@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { UserRole, Application, ApplicationStatus } from './types';
 import Dashboard from './components/Dashboard';
 import ApplicationWizard from './components/ApplicationWizard';
@@ -10,6 +10,8 @@ import { GoogleSheetService } from './services/googleSheetService';
 
 type ViewType = 'home' | 'applications' | 'create';
 
+type SyncStatus = 'syncing' | 'connected' | 'error';
+
 const App: React.FC = () => {
   const [currentUserRole, setCurrentUserRole] = useState<UserRole>(UserRole.APPLICANT);
   const [applications, setApplications] = useState<Application[]>([]);
@@ -19,20 +21,64 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isManualModalOpen, setIsManualModalOpen] = useState(false);
 
-  // Load data from Google Sheets on mount
-  useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
-      if (GoogleSheetService.isEnabled()) {
-        const data = await GoogleSheetService.fetchAll();
-        setApplications(data);
+  // Real-time Cloud Sync State Tracking
+  const [syncStatus, setSyncStatus] = useState<SyncStatus>('syncing');
+  const [lastSyncTime, setLastSyncTime] = useState<Date | null>(null);
+  const [syncError, setSyncError] = useState<string | null>(null);
+  const [isManualSyncing, setIsManualSyncing] = useState(false);
+  const isFetchingRef = useRef(false);
+
+  // Real-time Cloud Fetch with transparent status tracking
+  const syncWithCloud = useCallback(async (isSilent: boolean = false) => {
+    if (isFetchingRef.current) return;
+    isFetchingRef.current = true;
+
+    if (!isSilent) {
+      setSyncStatus('syncing');
+      setIsManualSyncing(true);
+    }
+
+    try {
+      const result = await GoogleSheetService.fetchAllWithStatus();
+      if (result.success) {
+        setApplications(result.data);
+        setLastSyncTime(result.timestamp);
+        setSyncStatus('connected');
+        setSyncError(null);
       } else {
-        setApplications([]);
+        // Fetch returned an error
+        setSyncStatus('error');
+        setSyncError(result.error || 'Gagal memuat turun data daripada Google Sheets.');
+        if (result.data && result.data.length > 0) {
+          // Keep existing cached data if available
+          setApplications(result.data);
+        }
       }
+    } catch (err: any) {
+      setSyncStatus('error');
+      setSyncError(err?.message || 'Ralat sambungan rangkaian ke Google Sheets.');
+    } finally {
       setIsLoading(false);
-    };
-    loadData();
+      setIsManualSyncing(false);
+      isFetchingRef.current = false;
+    }
   }, []);
+
+  // Initial load
+  useEffect(() => {
+    syncWithCloud(false);
+  }, [syncWithCloud]);
+
+  // Periodic real-time background sync (every 30 seconds)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        syncWithCloud(true);
+      }
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [syncWithCloud]);
 
   const handleCreateApplication = async (newApp: Application) => {
     // Optimistic UI update
@@ -41,8 +87,16 @@ const App: React.FC = () => {
     setCurrentView('applications');
 
     // Persist to Cloud Google Sheets
-    if (GoogleSheetService.isEnabled()) {
-      await GoogleSheetService.saveOrUpdate(newApp);
+    setSyncStatus('syncing');
+    const success = await GoogleSheetService.saveOrUpdate(newApp);
+    if (success) {
+      setSyncStatus('connected');
+      setLastSyncTime(new Date());
+      // Re-sync to verify cloud state
+      setTimeout(() => syncWithCloud(true), 1500);
+    } else {
+      setSyncStatus('error');
+      setSyncError('Gagal menyimpan rekod baharu ke Google Sheets. Sila semak sambungan internet anda.');
     }
   };
 
@@ -52,10 +106,19 @@ const App: React.FC = () => {
     setApplications(updatedList);
 
     // Persist to Cloud Google Sheets
-    if (GoogleSheetService.isEnabled()) {
-      return await GoogleSheetService.saveOrUpdate(updatedApp);
+    setSyncStatus('syncing');
+    const success = await GoogleSheetService.saveOrUpdate(updatedApp);
+    if (success) {
+      setSyncStatus('connected');
+      setLastSyncTime(new Date());
+      // Re-sync in background to reflect changes
+      setTimeout(() => syncWithCloud(true), 1500);
+      return true;
+    } else {
+      setSyncStatus('error');
+      setSyncError('Gagal mengemas kini data ke Google Sheets. Sila semak sambungan internet anda.');
+      return false;
     }
-    return true;
   };
 
   const handleRoleChange = (newRole: UserRole) => {
@@ -72,7 +135,8 @@ const App: React.FC = () => {
       return (
         <div className="flex flex-col items-center justify-center py-20 animate-pulse print:hidden">
           <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mb-4"></div>
-          <p className="text-slate-500 font-medium">Syncing with Google Sheets...</p>
+          <p className="text-slate-700 font-bold text-base">Menyegerak Pangkalan Data Cloud (Google Sheets)...</p>
+          <p className="text-slate-400 text-xs mt-1">Memuat turun data penyerahan secara langsung</p>
         </div>
       );
     }
@@ -135,6 +199,24 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans text-slate-800 antialiased">
+      {/* Real-time Sync Error Notification Banner */}
+      {syncStatus === 'error' && syncError && (
+        <div className="bg-rose-600 text-white px-4 py-2.5 text-xs font-semibold flex items-center justify-between gap-3 sticky top-0 z-60 shadow-md animate-in slide-in-from-top print:hidden">
+          <div className="flex items-center gap-2">
+            <i className="fas fa-exclamation-triangle text-amber-300 text-sm"></i>
+            <span><strong>Ralat Sambungan Cloud:</strong> {syncError}</span>
+          </div>
+          <button
+            onClick={() => syncWithCloud(false)}
+            disabled={isManualSyncing}
+            className="bg-white hover:bg-slate-100 text-rose-700 font-bold px-3 py-1 rounded-lg text-xs transition-all shadow-xs shrink-0 flex items-center gap-1.5 cursor-pointer"
+          >
+            <i className={`fas fa-sync-alt ${isManualSyncing ? 'animate-spin' : ''}`}></i>
+            Cuba Segar Semula
+          </button>
+        </div>
+      )}
+
       {/* Top Institutional Header - Hidden on Print */}
       <header className="bg-white border-b border-slate-200/90 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-3.5 xl:gap-6 sticky top-0 z-50 shadow-xs print:hidden">
         <div 
@@ -173,12 +255,32 @@ const App: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 w-full xl:w-auto justify-start xl:justify-end overflow-x-visible flex-wrap">
-          {!GoogleSheetService.isEnabled() && (
-            <div className="hidden 2xl:flex items-center gap-1.5 bg-amber-50 text-amber-800 px-3 py-1.5 rounded-lg border border-amber-200/80 text-[11px] font-bold shrink-0">
-              <i className="fas fa-database text-amber-600"></i>
-              MOD TEMPATAN (Offline Storage)
-            </div>
-          )}
+          {/* Real-time Cloud Sync Live Indicator Button in Header */}
+          <button
+            onClick={() => syncWithCloud(false)}
+            disabled={isManualSyncing}
+            title={syncStatus === 'connected' ? `Disegerak pada ${lastSyncTime?.toLocaleTimeString('ms-MY') || 'Kini'}. Klik untuk segar semula.` : 'Klik untuk segerak dengan Google Sheets'}
+            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border text-[11px] font-bold transition-all cursor-pointer shrink-0 ${
+              syncStatus === 'connected'
+                ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300'
+                : syncStatus === 'syncing'
+                ? 'bg-blue-50 text-blue-800 border-blue-200 animate-pulse'
+                : 'bg-rose-50 text-rose-800 border-rose-200 hover:bg-rose-100'
+            }`}
+          >
+            <i className={`fas fa-sync-alt text-[10px] ${syncStatus === 'syncing' || isManualSyncing ? 'animate-spin text-blue-600' : syncStatus === 'connected' ? 'text-emerald-600' : 'text-rose-600'}`}></i>
+            <span className="hidden md:inline">
+              {syncStatus === 'syncing'
+                ? 'Menyegerak Cloud...'
+                : syncStatus === 'connected'
+                ? `Cloud Aktif (${applications.length} Rekod)`
+                : 'Ralat Cloud (Klik Cuba Semula)'}
+            </span>
+            {syncStatus === 'connected' && (
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            )}
+          </button>
+
           <RoleSwitcher 
             currentRole={currentUserRole} 
             onRoleChange={handleRoleChange} 
@@ -230,6 +332,16 @@ const App: React.FC = () => {
 
           <div className="flex items-center gap-2.5 shrink-0">
             <button
+              onClick={() => syncWithCloud(false)}
+              disabled={isManualSyncing}
+              title="Segar Semula Data Dari Google Sheets"
+              className="text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 cursor-pointer"
+            >
+              <i className={`fas fa-sync-alt text-blue-400 text-xs ${isManualSyncing ? 'animate-spin' : ''}`}></i>
+              <span className="hidden sm:inline">{isManualSyncing ? 'Menyegerak...' : 'Segar Semula'}</span>
+            </button>
+
+            <button
               onClick={() => setIsManualModalOpen(true)}
               className="text-xs font-semibold text-slate-200 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 cursor-pointer"
             >
@@ -264,13 +376,24 @@ const App: React.FC = () => {
               Sistem ResFlow &copy; {new Date().getFullYear()} • Hak Cipta Terpelihara JK MJPKKM & JK Inovasi/KIK
             </p>
             <div className="flex items-center justify-center md:justify-end gap-3 pt-0.5">
-              {GoogleSheetService.isEnabled() ? (
-                <span className="text-[10px] flex items-center gap-1.5 text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Pangkalan Data Aktif (Cloud Sync)
+              {syncStatus === 'connected' ? (
+                <span className="text-[10px] flex items-center gap-1.5 text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Pangkalan Data Cloud Aktif • {applications.length} Rekod Disegerak {lastSyncTime ? `(${lastSyncTime.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit', second: '2-digit' })})` : ''}
+                </span>
+              ) : syncStatus === 'syncing' ? (
+                <span className="text-[10px] flex items-center gap-1.5 text-blue-700 font-bold bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">
+                  <i className="fas fa-sync-alt animate-spin text-[10px] text-blue-600"></i>
+                  Sedang Menyegerak dengan Cloud Google Sheets...
                 </span>
               ) : (
-                <span className="text-[10px] text-slate-400">Penyimpanan Tempatan Disimpan</span>
+                <button
+                  onClick={() => syncWithCloud(false)}
+                  className="text-[10px] flex items-center gap-1.5 text-rose-700 font-bold bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-lg border border-rose-200 cursor-pointer transition-all"
+                >
+                  <i className="fas fa-exclamation-circle text-rose-600"></i>
+                  Ralat Sambungan Cloud • Klik untuk Cuba Semula
+                </button>
               )}
             </div>
           </div>
