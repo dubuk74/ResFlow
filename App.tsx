@@ -255,32 +255,6 @@ const App: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 w-full xl:w-auto justify-start xl:justify-end overflow-x-visible flex-wrap">
-          {/* Real-time Cloud Sync Live Indicator Button in Header */}
-          <button
-            onClick={() => syncWithCloud(false)}
-            disabled={isManualSyncing}
-            title={syncStatus === 'connected' ? `Disegerak pada ${lastSyncTime?.toLocaleTimeString('ms-MY') || 'Kini'}. Klik untuk segar semula.` : 'Klik untuk segerak dengan Google Sheets'}
-            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border text-[11px] font-bold transition-all cursor-pointer shrink-0 ${
-              syncStatus === 'connected'
-                ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300'
-                : syncStatus === 'syncing'
-                ? 'bg-blue-50 text-blue-800 border-blue-200 animate-pulse'
-                : 'bg-rose-50 text-rose-800 border-rose-200 hover:bg-rose-100'
-            }`}
-          >
-            <i className={`fas fa-sync-alt text-[10px] ${syncStatus === 'syncing' || isManualSyncing ? 'animate-spin text-blue-600' : syncStatus === 'connected' ? 'text-emerald-600' : 'text-rose-600'}`}></i>
-            <span className="hidden md:inline">
-              {syncStatus === 'syncing'
-                ? 'Menyegerak Cloud...'
-                : syncStatus === 'connected'
-                ? `Cloud Aktif (${applications.length} Rekod)`
-                : 'Ralat Cloud (Klik Cuba Semula)'}
-            </span>
-            {syncStatus === 'connected' && (
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            )}
-          </button>
-
           <RoleSwitcher 
             currentRole={currentUserRole} 
             onRoleChange={handleRoleChange} 
@@ -338,7 +312,7 @@ const App: React.FC = () => {
               className="text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 cursor-pointer"
             >
               <i className={`fas fa-sync-alt text-blue-400 text-xs ${isManualSyncing ? 'animate-spin' : ''}`}></i>
-              <span className="hidden sm:inline">{isManualSyncing ? 'Menyegerak...' : 'Segar Semula'}</span>
+              <span className="hidden sm:inline">{isManualSyncing ? 'Menyegerak...' : 'Sync/Segar Google Sheet'}</span>
             </button>
 
             <button

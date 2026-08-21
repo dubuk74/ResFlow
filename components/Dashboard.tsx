@@ -218,13 +218,18 @@ const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, 
             </button>
           )}
           {role === UserRole.APPLICANT && (
-            <button 
-              onClick={onCreateNew}
-              className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-semibold text-xs shadow-sm transition-all cursor-pointer"
-            >
-              <i className="fas fa-plus"></i>
-              Permohonan Baharu
-            </button>
+            <div className="flex flex-col items-end gap-1">
+              <button 
+                onClick={onCreateNew}
+                className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-semibold text-xs shadow-sm transition-all cursor-pointer"
+              >
+                <i className="fas fa-plus"></i>
+                Permohonan Baharu
+              </button>
+              <span className="text-[11px] font-medium text-slate-500">
+                Pastikan Google Sheet telah disegarkan/sync.
+              </span>
+            </div>
           )}
         </div>
       </div>

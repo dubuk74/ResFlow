@@ -62,15 +62,20 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
             Portal rasmi pengurusan, semakan panel, dan kelulusan digital kertas kerja penyelidikan pensyarah serta inovasi pelajar Kolej Matrikulasi Perak.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3.5">
+          <div className="flex flex-wrap items-start gap-3.5">
             {role === UserRole.APPLICANT ? (
-              <button 
-                onClick={() => onNavigate('create')}
-                className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-xl font-bold transition-all flex items-center gap-2.5 shadow-lg shadow-blue-900/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-sm"
-              >
-                <i className="fas fa-file-signature text-base"></i>
-                <span>Hantar Permohonan Baharu</span>
-              </button>
+              <div className="flex flex-col items-start gap-1.5">
+                <button 
+                  onClick={() => onNavigate('create')}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-7 py-3.5 rounded-xl font-bold transition-all flex items-center gap-2.5 shadow-lg shadow-blue-900/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-sm"
+                >
+                  <i className="fas fa-file-signature text-base"></i>
+                  <span>Hantar Permohonan Baharu</span>
+                </button>
+                <span className="text-xs text-blue-200/90 font-medium">
+                  Pastikan Google Sheet telah disegarkan/sync.
+                </span>
+              </div>
             ) : role === UserRole.DIRECTOR ? (
               <button 
                 onClick={() => onNavigate('applications')}
