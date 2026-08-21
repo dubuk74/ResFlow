@@ -436,6 +436,7 @@ const StageActions: React.FC<StageActionsProps> = ({ role, app, onUpdate, onEdit
           <p className="text-slate-500 font-medium">Acara</p>
           <p className="font-bold text-slate-800">
             {app.eventName} ({
+              app.eventLevel === 'State' ? 'Negeri' :
               app.eventLevel === 'National' ? 'Kebangsaan' :
               app.eventLevel === 'International (Dalam Negeri)' ? 'Antarabangsa (Dalam Negeri)' :
               app.eventLevel === 'International (Luar Negeri)' ? 'Antarabangsa (Luar Negeri)' :

@@ -41,7 +41,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
     eventLocation: initialData?.eventLocation || '',
     eventDate: initialData?.eventDate || '',
     eventEndDate: initialData?.eventEndDate || '',
-    eventLevel: (initialData?.eventLevel || 'National') as 'National' | 'International (Dalam Negeri)' | 'International (Luar Negeri)' | 'International',
+    eventLevel: (initialData?.eventLevel || 'State') as 'State' | 'National' | 'International (Dalam Negeri)' | 'International (Luar Negeri)' | 'International',
     teamMembers: initialData?.teamMembers || [],
     selectedReviewers: initialData?.selectedReviewers?.length 
       ? initialData.selectedReviewers 
@@ -271,6 +271,7 @@ const ApplicationWizard: React.FC<ApplicationWizardProps> = ({ initialData, onCa
                 <div className="space-y-1 md:col-span-2">
                   <label className="text-xs font-bold text-slate-500 uppercase">Peringkat</label>
                   <select value={formData.eventLevel} onChange={e => setFormData({...formData, eventLevel: e.target.value as any})} className="w-full border border-slate-200 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
+                    <option value="State">Negeri</option>
                     <option value="National">Kebangsaan</option>
                     <option value="International (Dalam Negeri)">Antarabangsa (Dalam Negeri)</option>
                     <option value="International (Luar Negeri)">Antarabangsa (Luar Negeri)</option>

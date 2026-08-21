@@ -469,7 +469,7 @@ export const HodDashboard: React.FC<HodDashboardProps> = ({
                       📅 {app.eventDate ? new Date(app.eventDate).toLocaleDateString('ms-MY') : '-'}
                     </span>
                     <span className="bg-slate-100 px-3 py-1 rounded-lg text-slate-700 font-bold">
-                      🌍 {app.eventLevel === 'National' ? 'Kebangsaan' : 'Antarabangsa'}
+                      🌍 {app.eventLevel === 'State' ? 'Negeri' : app.eventLevel === 'National' ? 'Kebangsaan' : 'Antarabangsa'}
                     </span>
                   </div>
                 </div>

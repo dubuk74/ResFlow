@@ -228,6 +228,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ app, onClose, initialT
                     <span className="font-bold text-slate-500 block">Peringkat & Tarikh Acara:</span>
                     <span className="font-semibold text-slate-800">
                       {app.eventLevel ? `PERINGKAT ${
+                        app.eventLevel === 'State' ? 'NEGERI' :
                         app.eventLevel === 'National' ? 'KEBANGSAAN' :
                         app.eventLevel === 'International (Dalam Negeri)' ? 'ANTARABANGSA (DALAM NEGERI)' :
                         app.eventLevel === 'International (Luar Negeri)' ? 'ANTARABANGSA (LUAR NEGERI)' :
@@ -364,6 +365,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ app, onClose, initialT
                     <span className="font-bold text-slate-500 block text-[11px] uppercase">Nama & Peringkat Acara:</span>
                     <span className="font-semibold text-slate-800">
                       {app.eventName || 'N/A'} {app.eventLevel ? `(${
+                        app.eventLevel === 'State' ? 'Negeri' :
                         app.eventLevel === 'National' ? 'Kebangsaan' :
                         app.eventLevel === 'International (Dalam Negeri)' ? 'Antarabangsa (Dalam Negeri)' :
                         app.eventLevel === 'International (Luar Negeri)' ? 'Antarabangsa (Luar Negeri)' :

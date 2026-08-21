@@ -212,9 +212,9 @@ export const GoogleSheetService = {
           eventLocation,
           eventDate,
           eventEndDate: item.eventEndDate || '',
-          eventLevel: (eventLevel === 'International (Dalam Negeri)' || eventLevel === 'International (Luar Negeri)' || eventLevel === 'International') 
+          eventLevel: (eventLevel === 'State' || eventLevel === 'International (Dalam Negeri)' || eventLevel === 'International (Luar Negeri)' || eventLevel === 'International') 
             ? eventLevel 
-            : 'National',
+            : (eventLevel === 'Negeri' ? 'State' : 'National'),
           submissionDate,
           status,
           targetCommittee: targetCommittee === 'INOVASI' ? 'INOVASI' : 'MJPKKM',
