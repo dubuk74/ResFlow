@@ -227,7 +227,7 @@ const Dashboard: React.FC<DashboardProps> = ({ role, applications, onCreateNew, 
                 Permohonan Baharu
               </button>
               <span className="text-[11px] font-medium text-slate-500">
-                Pastikan Google Sheet telah disegarkan/sync.
+                Pastikan Google Sheet telah disegerakkan/sync.
               </span>
             </div>
           )}

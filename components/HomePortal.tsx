@@ -73,7 +73,7 @@ const HomePortal: React.FC<HomePortalProps> = ({ role, applications, onNavigate,
                   <span>Hantar Permohonan Baharu</span>
                 </button>
                 <span className="text-xs text-blue-200/90 font-medium">
-                  Pastikan Google Sheet telah disegarkan/sync.
+                  Pastikan Google Sheet telah disegerakkan/sync.
                 </span>
               </div>
             ) : role === UserRole.DIRECTOR ? (

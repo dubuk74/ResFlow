@@ -212,7 +212,7 @@ const App: React.FC = () => {
             className="bg-white hover:bg-slate-100 text-rose-700 font-bold px-3 py-1 rounded-lg text-xs transition-all shadow-xs shrink-0 flex items-center gap-1.5 cursor-pointer"
           >
             <i className={`fas fa-sync-alt ${isManualSyncing ? 'animate-spin' : ''}`}></i>
-            Cuba Segar Semula
+            Cuba Segerak Semula
           </button>
         </div>
       )}
@@ -308,11 +308,11 @@ const App: React.FC = () => {
             <button
               onClick={() => syncWithCloud(false)}
               disabled={isManualSyncing}
-              title="Segar Semula Data Dari Google Sheets"
+              title="Segerak Semula Data Dari Google Sheets"
               className="text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 cursor-pointer"
             >
               <i className={`fas fa-sync-alt text-blue-400 text-xs ${isManualSyncing ? 'animate-spin' : ''}`}></i>
-              <span className="hidden sm:inline">{isManualSyncing ? 'Menyegerak...' : 'Sync/Segar Google Sheet'}</span>
+              <span className="hidden sm:inline">{isManualSyncing ? 'Menyegerak...' : 'Sync/Segerak Google Sheet'}</span>
             </button>
 
             <button
